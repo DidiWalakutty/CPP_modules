@@ -5,12 +5,12 @@
 #                                                      +:+                     #
 #    By: diwalaku <diwalaku@codam.student.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2025/01/14 19:47:04 by diwalaku      #+#    #+#                  #
-#    Updated: 2025/01/16 17:37:16 by diwalaku      ########   odam.nl          #
+#    Created: 2025/01/16 17:27:03 by diwalaku      #+#    #+#                  #
+#    Updated: 2025/01/16 17:38:50 by diwalaku      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= megaphone
+NAME		= phonebook
 
 # Configuration
 CC			= c++
@@ -18,7 +18,7 @@ CPP_FLAGS	= -Wall -Werror -Wextra
 CPP_FLAGS	+= -std=c++98
 RM			= rm -rf
 # Source Files
-SRC			= megaphone.cpp
+SRC			= main.cpp Contact.cpp PhoneBook.cpp
 
 # Object Files and Directories
 OBJDIR		= obj
