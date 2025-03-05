@@ -6,7 +6,7 @@
 #    By: diwalaku <diwalaku@codam.student.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/01/14 19:47:04 by diwalaku      #+#    #+#                  #
-#    Updated: 2025/01/16 17:37:16 by diwalaku      ########   odam.nl          #
+#    Updated: 2025/03/05 17:41:50 by diwalaku      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC			= megaphone.cpp
 
 # Object Files and Directories
 OBJDIR		= obj
-OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.c=.o)))
+OBJ			= $(notdir $(SRC:.c=.o))
 
 # Objectives
 all:	$(NAME)
