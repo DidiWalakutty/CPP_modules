@@ -1,13 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   Contact.hpp                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/02/20 15:22:58 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/20 15:23:17 by diwalaku      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
+#include <string>
 
-#
+class Contact
+{
+	private:
+		std::string	first_name, last_name, nick_name, phone_number, darkest_secret;
+		std::string	check_name(const std::string &question, const std::string &type);
+		bool		spellingrules(const std::string &name, const std::string &type);
+		std::string	check_phone();
+		bool		phonerules(const std::string &phone);
+		std::string check_secret();
+		// truncate?
+	public:
+		void		setContact();
+		void		printContacts();
+		void		printFullContact();	
+};
