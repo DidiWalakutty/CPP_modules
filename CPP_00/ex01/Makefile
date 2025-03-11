@@ -6,7 +6,7 @@
 #    By: diwalaku <diwalaku@codam.student.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/01/16 17:27:03 by diwalaku      #+#    #+#                  #
-#    Updated: 2025/01/16 17:38:50 by diwalaku      ########   odam.nl          #
+#    Updated: 2025/03/11 21:11:31 by diwalaku      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,22 +17,23 @@ CC			= c++
 CPP_FLAGS	= -Wall -Werror -Wextra
 CPP_FLAGS	+= -std=c++98
 RM			= rm -rf
+HEADERS		= -I ./include
 # Source Files
-SRC			= main.cpp Contact.cpp PhoneBook.cpp
+SRC			= src/main.cpp src/Contact.cpp src/PhoneBook.cpp src/utils.cpp
 
 # Object Files and Directories
 OBJDIR		= obj
-OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.c=.o)))
+OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))
 
 # Objectives
 all:	$(NAME)
 
 $(NAME): $(OBJ)
-		$(CC) $(OBJ) $(CPP_FLAGS) -o $(NAME)
+		$(CC) $(OBJ) $(CPP_FLAGS) $(HEADERS) -o $(NAME)
 
-$(OBJDIR)/%.o: %.cpp
+$(OBJDIR)/%.o: src/%.cpp
 		@mkdir -p $(OBJDIR)
-		$(CC) $(CPP_FLAGS) -c -o $@ $^
+		$(CC) $(CPP_FLAGS) $(HEADERS) -c -o $@ $^
 
 # Cleaning
 clean:

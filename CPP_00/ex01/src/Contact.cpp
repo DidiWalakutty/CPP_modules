@@ -6,13 +6,14 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 20:25:59 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/11 18:43:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/11 21:17:41 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Contact.hpp"
 #include <iostream>
-#include <cctype>
+#include <iomanip>
+#include <cstdlib>
 
 void Contact::setContact()
 {
@@ -66,7 +67,8 @@ std::string Contact::checkPhone()
 	while (phone.empty() || !phoneRules(phone) || phone.length() > 15)
 	{
 		std::cout << "Your phone input is invalid.\n";
-		std::cout << "- The phonenumber may start with a '+'.\n- It may contain up to 3 dashes.\n- It must have a minimum of 7 digits and end with a digit.\n";
+		std::cout << "- The phonenumber may start with a '+'.\n- It may contain up to 3 dashes.\n";
+		std::cout << "- It must have a minimum of 7 digits and end with a digit.\n";
 		std::cout << "- The phonenumber can't contain more than 15 characters\n\n";
 		std::cout << "Please re-enter the phonenumber: \n";
 		if (!std::getline(std::cin, phone))
@@ -101,4 +103,21 @@ std::string Contact::checkSecret()
 		}
 	}
 	return (secret);
+}
+
+void	Contact::printContacts(int i)
+{
+	std::cout << std::setw(10) << i << "|"
+			  << std::setw(10) << truncate(first_name) << "|"
+			  << std::setw(10) << truncate(last_name) << "|"
+			  << std::setw(10) << truncate(nick_name) << std::endl;
+}
+
+void	Contact::printFullContact()
+{
+	std::cout << "First Name: " << first_name << "\n";
+	std::cout << "Last Name: " << last_name << "\n";
+	std::cout << "Nickname: " << nick_name << "\n";
+	std::cout << "Phone Number: " << phone_number << "\n";
+	std::cout << "Darkest Secret: " << darkest_secret << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 22:13:42 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/11 18:44:00 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/11 19:23:45 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,12 @@ bool	Contact::secretRules(const std::string &secret)
 			return (false);
 	}
 	return (true);
+}
+
+// Double check if length is > 9 or 10
+std::string Contact::truncate(const std::string &name)
+{
+	if (name.length() > 10)
+		return (name.substr(0, 9) + ".");
+	return (name);
 }

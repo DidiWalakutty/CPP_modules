@@ -1,3 +1,6 @@
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+
 #include <string>
 
 class Contact
@@ -10,9 +13,12 @@ class Contact
 		bool		phoneRules(const std::string &phone);
 		std::string checkSecret();
 		bool		secretRules(const std::string &secret);
-		// truncate?
+		std::string	truncate(const std::string &name);
+
 	public:
 		void		setContact();
-		void		printContacts();
+		void		printContacts(int i);
 		void		printFullContact();	
 };
+
+#endif

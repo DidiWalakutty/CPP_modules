@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/16 17:31:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/06 21:19:56 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/11 21:14:55 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(void)
 		else if (command == "SEARCH")
 			myContacts.searchContacts();
 		else if (command == "EXIT")
-			break ;
+			break ; // or exit(1)?
 		else
 			std::cout << "Invalid command." << std::endl;
 	}
