@@ -6,13 +6,14 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 22:13:42 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/06 23:15:52 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/11 18:44:00 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Contact.hpp"
+#include <iostream>
 
-bool	Contact::spellingrules(const std::string &name, const std::string &type)
+bool	Contact::spellingRules(const std::string &name, const std::string &type)
 {
 	if (std::isspace(name.front()) || std::isspace(name.back()))
 		return (false);
@@ -36,28 +37,39 @@ bool	Contact::spellingrules(const std::string &name, const std::string &type)
 	return (true);
 } 
 
-bool	Contact::phonerules(const std::string &phone)
+bool	Contact::phoneRules(const std::string &phone)
 {
 	size_t	dash_count = 0;
 	size_t	digits = 0;
+	size_t	i = 0;
 
-	if (phone.empty())
+	if (!std::isdigit(phone.back()))
 		return (false);
-	
-
-	for (char c : phone)
+	if (phone[0] == '+')
+		i++;
+	for (; i < phone.size(); i++)
 	{
-		if (index == 0 && c == '+')
-			index++;
-		if (!std::isdigit(c) && c != '-')
-			return (false);
+		char c = phone[i];
 		if (c == '-')
 			dash_count++;
-		if (std::isdigit(c))
+		else if (std::isdigit(c))
 			digits++;
-		index++;
+		else
+			return (false);
 	}
 	if (dash_count > 3 || digits < 7)
 		return (false);
+	return (true);
+}
+
+bool	Contact::secretRules(const std::string &secret)
+{
+	if (std::isspace(secret.front()) || std::isspace(secret.back()))
+		return (false);
+	for (char c : secret)
+	{
+		if (c == '\n' || c == '\t')
+			return (false);
+	}
 	return (true);
 }
