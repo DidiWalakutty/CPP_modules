@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 20:24:17 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/11 21:22:42 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/12 16:16:32 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	PhoneBook::searchContacts()
 {
 	if (num_contact == 0)
 	{
-		std::cout << "Phonebook is empty\n" << std::endl;
+		std::cout << "Your phonebook is currently empty." << std::endl;
 		return ;
 	}
 	std::cout << std::setw(10) << std::right << "index" << "|"
@@ -48,8 +48,7 @@ void	PhoneBook::searchContacts()
 	}
 	if (!input_i.empty() && std::isdigit(input_i[0]) && input_i.length() == 1)
 	{
-		// must compile with std++98, so can't use stoi
-		std::istringstream(input_i) >> index;
+		index = std::stoi(input_i);
 		if (index >= 0 && index < std::min(num_contact, 8))
 			contacts[index].printFullContact();
 		else

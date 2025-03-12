@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 22:13:42 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/11 19:23:45 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/12 16:15:24 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ bool	Contact::spellingRules(const std::string &name, const std::string &type)
 {
 	if (std::isspace(name.front()) || std::isspace(name.back()))
 		return (false);
-	for (char c : name)	// range-based loop that loops through each char of name
+	// range-based loop that loops through each char of name
+	for (char c : name)
 	{
 		if (type == "first" || type == "last")
 		{

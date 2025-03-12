@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 20:25:59 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/11 21:17:41 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/12 16:17:38 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ std::string Contact::checkPhone()
 	{
 		std::cout << "Your phone input is invalid.\n";
 		std::cout << "- The phonenumber may start with a '+'.\n- It may contain up to 3 dashes.\n";
-		std::cout << "- It must have a minimum of 7 digits and end with a digit.\n";
+		std::cout << "- It must have a minimum of 7 digits and must end with a digit.\n";
 		std::cout << "- The phonenumber can't contain more than 15 characters\n\n";
 		std::cout << "Please re-enter the phonenumber: \n";
 		if (!std::getline(std::cin, phone))
@@ -92,8 +92,9 @@ std::string Contact::checkSecret()
 	}
 	while (secret.empty() || !secretRules(secret) || secret.length() > 50)
 	{
-		std::cout << "Your darkest secret input is invalid.\n";
+		std::cout << "The input for darkest secret is invalid.\n";
 		std::cout << "- It can't be empty or contain newlines or tabs.\n";
+		std::cout << "- It can't start or end with whitespace.\n";
 		std::cout << "- It can't contain more than 50 characters.\n";
 		std::cout << "Please re-enter the darkest secret: \n";
 		if (!std::getline(std::cin, secret))

@@ -6,7 +6,7 @@
 #    By: diwalaku <diwalaku@codam.student.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/01/16 17:27:03 by diwalaku      #+#    #+#                  #
-#    Updated: 2025/03/11 21:11:31 by diwalaku      ########   odam.nl          #
+#    Updated: 2025/03/12 16:05:15 by diwalaku      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= phonebook
 # Configuration
 CC			= c++
 CPP_FLAGS	= -Wall -Werror -Wextra
-CPP_FLAGS	+= -std=c++98
+CPP_FLAGS	+= -std=c++11
 RM			= rm -rf
 HEADERS		= -I ./include
 # Source Files
