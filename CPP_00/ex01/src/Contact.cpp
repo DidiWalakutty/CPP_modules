@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 20:25:59 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/12 16:17:38 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 17:44:25 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ std::string Contact::checkName(const std::string &question, const std::string &t
 	}
 	while (name.empty() || !spellingRules(name, type) || name.length() > 50)
 	{
-		std::cout << "Your input is invalid.\n";
-		std::cout << "Please note: your input can't be empty, over 50 characters or start/end with spaces.\n\n";
+		std::cout << "\nYour input is invalid.\n\n";
+		std::cout << "Please note: your input can't be empty, over 50 characters or start/end with spaces.\n";
 		if (type == "first")
 			std::cout << "First names can only contain letters and spaces. No special characters or numbers.\n";
 		if (type == "last")
 			std::cout << "Last names can only contain letters, spaces and hyphens. No other special characters or numbers.\n";
 		if (type == "nickname")
 			std::cout << "Nicknames can contain letters, spaces, hyphens, numbers and special characters.\n";
-		std::cout << "\nPlease re-enter - " << question << "\n";
+		std::cout << "\nPlease re-enter - " << question;
 		if (!std::getline(std::cin, name))
 		{
 			std::cout << "\nDetected ctrl+d. Exiting..." << std::endl;
@@ -66,11 +66,11 @@ std::string Contact::checkPhone()
 	}
 	while (phone.empty() || !phoneRules(phone) || phone.length() > 15)
 	{
-		std::cout << "Your phone input is invalid.\n";
+		std::cout << "\nYour phone input is invalid.\n\n";
 		std::cout << "- The phonenumber may start with a '+'.\n- It may contain up to 3 dashes.\n";
 		std::cout << "- It must have a minimum of 7 digits and must end with a digit.\n";
 		std::cout << "- The phonenumber can't contain more than 15 characters\n\n";
-		std::cout << "Please re-enter the phonenumber: \n";
+		std::cout << "Please re-enter the phonenumber: ";
 		if (!std::getline(std::cin, phone))
 		{
 			std::cout << "\nDetected ctrl+d. Exiting..." << std::endl;
@@ -92,11 +92,11 @@ std::string Contact::checkSecret()
 	}
 	while (secret.empty() || !secretRules(secret) || secret.length() > 50)
 	{
-		std::cout << "The input for darkest secret is invalid.\n";
+		std::cout << "\nThe input for darkest secret is invalid.\n\n";
 		std::cout << "- It can't be empty or contain newlines or tabs.\n";
 		std::cout << "- It can't start or end with whitespace.\n";
 		std::cout << "- It can't contain more than 50 characters.\n";
-		std::cout << "Please re-enter the darkest secret: \n";
+		std::cout << "Please re-enter the darkest secret: ";
 		if (!std::getline(std::cin, secret))
 		{
 			std::cout << "\nDetected ctrl+d. Exiting...\n" << std::endl;
