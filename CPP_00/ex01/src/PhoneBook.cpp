@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 20:24:17 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/13 18:01:39 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/17 16:00:17 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	PhoneBook::searchContacts()
 	std::cout << "Please enter index: \n";
 	if (!std::getline(std::cin, input_i))
 	{
-		std::cout << "Detected ctrl+d. Exiting...\n" << std::endl;
+		std::cout << "End of input detected (Ctrl+D). Exiting program...\n" << std::endl;
 		exit(1);
 	}
 	if (!input_i.empty() && std::isdigit(input_i[0]) && input_i.length() == 1)

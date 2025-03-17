@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 22:13:42 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/12 16:15:24 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/14 16:01:18 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ bool	Contact::spellingRules(const std::string &name, const std::string &type)
 	{
 		if (type == "first" || type == "last")
 		{
-			if (!std::isalpha(c) && !std::isspace(c))
-			{
-				if (type == "last" && c == '-')
-					continue ;
+			if (!std::isalpha(c) && !std::isspace(c) && c != '-')
 				return (false);
-			}
 		}
 		if (type == "nickname")
 		{

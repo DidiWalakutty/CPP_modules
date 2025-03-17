@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/06 20:25:59 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/13 17:44:25 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/17 16:00:17 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,22 @@ std::string Contact::checkName(const std::string &question, const std::string &t
 	std::cout << question;
 	if (!std::getline(std::cin, name))
 	{
-		std::cout << "\nDetected ctrl+d. Exiting..." << std::endl;
+		std::cout << "\nEnd of input detected (Ctrl+D). Exiting program..." << std::endl;
 		exit(1);
 	}
 	while (name.empty() || !spellingRules(name, type) || name.length() > 50)
 	{
 		std::cout << "\nYour input is invalid.\n\n";
 		std::cout << "Please note: your input can't be empty, over 50 characters or start/end with spaces.\n";
-		if (type == "first")
-			std::cout << "First names can only contain letters and spaces. No special characters or numbers.\n";
-		if (type == "last")
-			std::cout << "Last names can only contain letters, spaces and hyphens. No other special characters or numbers.\n";
+		std::cout << "First and last names can only contain letters, spaces and hyphens.\n";
+		if (type == "first" || type == "last")
+			std::cout << "No other special characters or numbers are allowed.\n";
 		if (type == "nickname")
 			std::cout << "Nicknames can contain letters, spaces, hyphens, numbers and special characters.\n";
 		std::cout << "\nPlease re-enter - " << question;
 		if (!std::getline(std::cin, name))
 		{
-			std::cout << "\nDetected ctrl+d. Exiting..." << std::endl;
+			std::cout << "\nEnd of input detected (Ctrl+D). Exiting program..." << std::endl;
 			exit(1);	
 		}
 	}
@@ -61,7 +60,7 @@ std::string Contact::checkPhone()
 	std::cout << "Phone Number: ";
 	if (!std::getline(std::cin, phone))
 	{
-		std::cout << "Detected ctrl+d. Exiting..." << std::endl;
+		std::cout << "End of input detected (Ctrl+D). Exiting program..." << std::endl;
 		exit(1);
 	}
 	while (phone.empty() || !phoneRules(phone) || phone.length() > 15)
@@ -73,7 +72,7 @@ std::string Contact::checkPhone()
 		std::cout << "Please re-enter the phonenumber: ";
 		if (!std::getline(std::cin, phone))
 		{
-			std::cout << "\nDetected ctrl+d. Exiting..." << std::endl;
+			std::cout << "\nEnd of input detected (Ctrl+D). Exiting program..." << std::endl;
 			exit(1);
 		}
 	}
@@ -87,7 +86,7 @@ std::string Contact::checkSecret()
 	std::cout << "Darkest Secret: ";
 	if (!std::getline(std::cin, secret))
 	{
-		std::cout << "\nDetected ctrl+d. Exiting..." << std::endl;
+		std::cout << "\nEnd of input detected (Ctrl+D). Exiting program..." << std::endl;
 		exit(1);
 	}
 	while (secret.empty() || !secretRules(secret) || secret.length() > 50)
@@ -99,7 +98,7 @@ std::string Contact::checkSecret()
 		std::cout << "Please re-enter the darkest secret: ";
 		if (!std::getline(std::cin, secret))
 		{
-			std::cout << "\nDetected ctrl+d. Exiting...\n" << std::endl;
+			std::cout << "\nEnd of input detected (Ctrl+D). Exiting program...\n" << std::endl;
 			exit(1);
 		}
 	}
