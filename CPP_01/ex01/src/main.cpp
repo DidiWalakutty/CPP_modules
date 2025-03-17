@@ -6,15 +6,12 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/17 19:40:27 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/17 20:22:15 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/17 20:35:34 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Zombie.hpp"
 
-// call the zombieHorde function with a test value
-// use announce function for each zombie
-// deallocate the horde memory
 int	main()
 {
 	int	N = 10;
@@ -30,6 +27,7 @@ int	main()
 	{
 		horde[i].announce();
 	}
-	delete[] horde;
+	if (horde)
+		delete[] horde;
 	return (0);
 }
