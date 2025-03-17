@@ -5,26 +5,31 @@
 /*                                                     +:+                    */
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/03/17 16:19:48 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/17 19:31:35 by diwalaku      ########   odam.nl         */
+/*   Created: 2025/03/17 19:40:27 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/17 20:22:15 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Zombie.hpp"
 
-// We're working with dynamic memory and creating a Zombie on the heap.
-// The constructor is called inside newZombie when calling new Zombie(...).
-// 'new' automatically calls the constructor during memory allocation.
-
-// randomChump should be on the stack: it's just to announce
-// newZombie should be on the heap: we need to use it outside the function scope
+// call the zombieHorde function with a test value
+// use announce function for each zombie
+// deallocate the horde memory
 int	main()
 {
-	Zombie *heapZombie = newZombie("Heap the Undead");
-	heapZombie->announce();
-	delete heapZombie;
-	
-	randomChump("DeadStack");
-	
+	int	N = 10;
+	if (N <= 2)
+	{
+		std::cout << "Number of zombies is too small for a horde." << std::endl;
+		return 1;
+	}
+
+	std::string name = "The Walking Dead";
+	Zombie* horde = zombieHorde(N, name);
+	for (int i = 0; i < N; i++)
+	{
+		horde[i].announce();
+	}
+	delete[] horde;
 	return (0);
 }

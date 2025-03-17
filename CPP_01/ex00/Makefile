@@ -1,26 +1,10 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: diwalaku <diwalaku@codam.student.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2025/03/17 16:14:57 by diwalaku      #+#    #+#                  #
-#    Updated: 2025/03/17 17:51:58 by diwalaku      ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
-
 NAME		= zombie
 
 # Configuration
 CC			= c++
-CPP_FLAGS	= -Wall -Werror -Wextra
-CPP_FLAGS	+= -std=c++11
+CPP_FLAGS	= -Wall -Werror -Wextra -std=c++11
 RM			= rm -rf
 HEADERS		= -I ./include
-
-SRCDIR	= src/
-OBJDIR	= obj/
 
 # Source Files
 SRC			=	src/main.cpp \
@@ -28,21 +12,26 @@ SRC			=	src/main.cpp \
 				src/newZombie.cpp \
 				src/randomChump.cpp
 
-SRCOBJ = $(SRC:%.cpp=$(OBJDIR)%.o)
+OBJDIR		= obj
+OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))
 
+# Objectives
 all: $(NAME)
 
-$(NAME): $(SRCOBJ)
-	$(CC) $(CPP_FLAGS) $(SRCOBJ) $(HEADERS) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CPP_FLAGS) $(OBJ) $(HEADERS) -o $(NAME)
 
-$(OBJDIR)%.o: $(SRCDIR)%.cpp
+$(OBJDIR)/%.o: src/%.cpp
 	@mkdir -p $(OBJDIR)
-	$(CC) -c $(CPP_FLAGS) -o $@ $<
+	$(CC) $(CPP_FLAGS) -c -o $@ $<
 
+# Cleaning
 clean:
 	$(RM) $(OBJDIR)
 
 fclean: clean
 	$(RM) $(NAME)
+
+re:		fclean all
 
 .phony: all clean fclean re	

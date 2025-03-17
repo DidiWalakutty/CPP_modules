@@ -1,0 +1,42 @@
+# Ignore build directories
+/build/
+/bin/
+/obj/
+/out/
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore compiled object files
+*.o
+*.obj
+
+# Ignore compiled executables
+*.exe
+*.out
+*.app
+
+# Ignore backup files and temp files
+*~
+*.bak
+*.swp
+
+# Ignore CMake files (if using CMake)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore Linux system files
+*.so
+*.so.*
+*.dSYM
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
+
+# Ignore any other files you don’t want tracked
