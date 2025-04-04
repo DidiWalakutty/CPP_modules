@@ -6,25 +6,18 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/16 16:42:36 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/05 17:42:32 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/04/04 19:19:42 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cctype>
 
-// std:: refers to the standard library in c, so we only use std:: when using 
-// functions, types or objects from that library. 
-// Length is already included in str
-
-// std::string is like char *
-// str = the variable name we give it.
-// argv[i] is what we assign to str.
-
-// std::cout prints the result of what's behind it.
-// static_cast<char> converts the result of std::toupper() to a char.
-// std::toupper returns an int, so we convert it to a char using static_cast.
-
+// std:: refers to the standard C++ library (e.g. std::string, std::cout).
+// We assign argv[i] to a std::string called str.
+// str.length() gives the number of characters in the string.
+// std::toupper returns an int, so we use static_cast<char> to safely convert it back to a char.
+// std::cout prints each uppercase character to the terminal.
 int	main(int argc, char **argv)
 {
 	if (argc == 1)

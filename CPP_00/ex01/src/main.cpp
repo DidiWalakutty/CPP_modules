@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/16 17:31:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/17 18:40:39 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/04/04 19:31:59 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include "../include/PhoneBook.hpp"
 #include <iostream>
 
-// Constructor is automatically called, because myContacts
-// is being created directly on the stack
-
+// Calls the default constructor, which sets num_contact to 0
 int	main(void)
 {
 	PhoneBook	myContacts;
@@ -36,7 +34,7 @@ int	main(void)
 		else if (command == "SEARCH")
 			myContacts.searchContacts();
 		else if (command == "EXIT")
-			break ; // or exit(1)?
+			break ;
 		else
 			std::cout << "Invalid command." << std::endl;
 	}
