@@ -6,7 +6,7 @@
 #    By: diwalaku <diwalaku@codam.student.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/01/14 19:47:04 by diwalaku      #+#    #+#                  #
-#    Updated: 2025/03/05 17:41:50 by diwalaku      ########   odam.nl          #
+#    Updated: 2025/04/05 19:05:30 by diwalaku      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CC			= c++
 CPP_FLAGS	= -Wall -Werror -Wextra
 CPP_FLAGS	+= -std=c++98
 RM			= rm -rf
+
 # Source Files
 SRC			= megaphone.cpp
 
