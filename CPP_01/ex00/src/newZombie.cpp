@@ -6,17 +6,14 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/17 18:22:09 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/17 20:31:09 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/04/11 16:22:50 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Zombie.hpp"
 
-// Directly creates a new Zombie on the heap and returns the pointer.
-// if mem alloc fails, new catches it and a bad_alloc is thrown and caught.
-// Nullptr has a dedicated type std::nullptr_t, NULL is an integer and 
-// can cause assigning an int or can't determine which function/operation to use
-// because both seem valid.
+// Tries to alloc a new zombie on the heap.
+// If alloc fails, new thros a bad_alloc.
 Zombie*	newZombie(std::string name)
 {
 	try

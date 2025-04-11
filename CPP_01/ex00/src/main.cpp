@@ -6,24 +6,20 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/17 16:19:48 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/17 19:31:35 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/04/11 16:19:53 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Zombie.hpp"
 
-// We're working with dynamic memory and creating a Zombie on the heap.
-// The constructor is called inside newZombie when calling new Zombie(...).
-// 'new' automatically calls the constructor during memory allocation.
-
-// randomChump should be on the stack: it's just to announce
-// newZombie should be on the heap: we need to use it outside the function scope
+// Creates a zombie on either the heap or stack.
 int	main()
 {
 	Zombie *heapZombie = newZombie("Heap the Undead");
 	heapZombie->announce();
-	delete heapZombie;
+	delete heapZombie;	// delete the heap-allocated zombie to free memory
 	
+	// creats a zombie on the stack and announce immediately.
 	randomChump("DeadStack");
 	
 	return (0);

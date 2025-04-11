@@ -6,28 +6,29 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/17 19:40:27 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/17 20:35:34 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/04/11 16:55:14 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Zombie.hpp"
 
+
+// Function where a zombie announces itself.
+// Need to determine in which case we allocate on stack or heap.
+// 
 int	main()
 {
-	int	N = 10;
-	if (N <= 2)
-	{
-		std::cout << "Number of zombies is too small for a horde." << std::endl;
-		return 1;
-	}
-
+	int	N = 15;
 	std::string name = "The Walking Dead";
+	//Creates a horde of N zombies with the given name
 	Zombie* horde = zombieHorde(N, name);
-	for (int i = 0; i < N; i++)
-	{
-		horde[i].announce();
-	}
+
+	// Each zombie announces itself
 	if (horde)
+	{
+		for (int i = 0; i < N; i++)
+			horde[i].announce();
 		delete[] horde;
+	}
 	return (0);
 }
