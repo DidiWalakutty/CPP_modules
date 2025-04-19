@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/11 18:04:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/19 21:22:40 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/04/19 22:02:14 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main()
 		Weapon club = Weapon("crude spiked club");
 		HumanB jim("Jim");
 
-		jim.attack();
 		jim.setWeapon(club);
+		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
 	}
