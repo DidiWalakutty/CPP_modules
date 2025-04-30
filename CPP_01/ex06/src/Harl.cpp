@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/04/30 16:30:35 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/30 18:03:27 by diwalaku      ########   odam.nl         */
+/*   Created: 2025/04/30 17:44:47 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/04/30 18:03:22 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,25 @@ void Harl::error()
 	std::cout << "The system has turned to the Dark Side! Execute Order 67!\n" << std::endl;
 }
 
-// Define an array of function pointers (whiningLevel). 
-// Each element in it a pointer to a member function of the Harl class. 
-// Harl::* defines pointers to member of Harl.
-// () indicates that the functions take no parameters.
-// Each element of the array now points to one of the four complaint functions.
+int	determine_level(std::string level)
+{
+	if (level == "DEBUG")
+		return (0);
+	if (level == "INFO")
+		return (1);
+	if (level == "WARNING")
+		return (2);
+	if (level == "ERROR")
+		return (3);
+	else
+		return (-1);
+}
+
+// We store the four Harl functions in an array of function pointers.
+// The level-string is turned into a number using determine_level(), because switch only works with ints.
+// The switch starts at that case-number and runs all matching messages after it.
+// If the level isn't valid, we show a default message instead.
+// This avoids using lots of if/else statements.
 void Harl::complain(std::string level)
 {
 	void (Harl::*whiningLevel[4])() =
@@ -63,22 +77,22 @@ void Harl::complain(std::string level)
 		&Harl::error
 	};
 
-	std::string stringLevel[4] =
+	int index = determine_level(level);
+	
+	switch (index)
 	{
-		"DEBUG",
-		"INFO",
-		"WARNING",
-		"ERROR"
-	};
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (stringLevel[i] == level)
-		{
-			(this->*whiningLevel[i])();
-			return ;
-		}
+		case 0:
+			(this->*whiningLevel[0])();
+		case 1:
+			(this->*whiningLevel[1])();
+		case 2:
+			(this->*whiningLevel[2])();
+		case 3:
+			(this->*whiningLevel[3])();
+			break ;
+		default:
+			std::cout << "[UNKNOWN]\n";
+			std::cout << "* This isn't the Level you're looking for... *\n" << std::endl;
+			break ;
 	}
-	std::cout << "[UNKNOWN]\n";
-	std::cout << "* This isn't the Level you're looking for... *\n" << std::endl;
 }

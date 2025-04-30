@@ -11,7 +11,7 @@ class Zombie
 	public:
 		Zombie(std::string name);	// Constructor: sets up the object when created and inits the zombies name
 		~Zombie();					// Destructor: cleans up (frees memory) when the zombie is destroyed
-		void	announce();			// Outputs a message from the zombie
+		void	announce();
 };
 
 // Function to create a zombie on the heap (dynamic alloc)
