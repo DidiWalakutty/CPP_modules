@@ -6,19 +6,16 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/11 17:00:46 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/11 17:59:52 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/01 16:01:58 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-// This program demonstrates the use of a string, a pointer to the string,
-// and a reference to the string.
 // - `str` is a string variable initialized to "HI THIS IS BRAIN".
-// - `stringPTR` is a pointer that holds the address of `str`.
-// - `stringREF` is a reference that refers directly to `str`.
-// The program prints the memory addresses and values of all three, 
-// which should be the same for all of them.
+// - `stringPTR` is a pointer that holds the address of `str` by using &.
+// - `stringREF` is a reference, like another name for the same variable, 
+//    that refers directly to `str`.
 int	main()
 {
 	std::string original = "HI THIS IS BRAIN";

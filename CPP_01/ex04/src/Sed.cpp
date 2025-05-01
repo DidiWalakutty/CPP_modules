@@ -6,13 +6,12 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/22 18:16:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/30 15:50:22 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/01 17:33:13 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Sed.hpp"
 
-// Replaces all occurrences of s1 with s2 in text.
 // Loops through text, copying everything before each s1 match to result.
 // At each match, appends s2 instead of s1.
 // Stops when .find() returns std::string::npos (not found).

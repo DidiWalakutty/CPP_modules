@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/30 16:30:35 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/30 18:03:27 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/01 18:19:22 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ void Harl::error()
 	std::cout << "The system has turned to the Dark Side! Execute Order 67!\n" << std::endl;
 }
 
-// Define an array of function pointers (whiningLevel). 
-// Each element in it a pointer to a member function of the Harl class. 
-// Harl::* defines pointers to member of Harl.
-// () indicates that the functions take no parameters.
-// Each element of the array now points to one of the four complaint functions.
+// Define an array of function pointers (whiningLevel), each element points to a function.
+// Harl::* defines pointers to member of Harl, (): functions takes no parameters.
+// The array stores the functions' addresses and points to one of the functions.
 void Harl::complain(std::string level)
 {
 	void (Harl::*whiningLevel[4])() =

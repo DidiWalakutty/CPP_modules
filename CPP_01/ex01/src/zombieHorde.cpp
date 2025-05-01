@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/17 19:45:48 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/11 16:54:02 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/01 12:51:00 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // - Allocs memory for N zombies
 // - Sets the name for each
 // - Returns a pointer to the first zombie
+// nullptr is type-safe and standard for C++
 Zombie*	zombieHorde(int N, std::string name)
 {
 	if (N < 1 || N > 500000)

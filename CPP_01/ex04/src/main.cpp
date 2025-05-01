@@ -6,15 +6,15 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/22 17:18:55 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/30 16:02:09 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/01 18:00:45 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Sed.hpp"
 
-// Validates the input file and s1.
 // Uses ifstream to try opening the file.
 // seekg moves the read position to end; tellg gets file size.
+// std::ios is a class inside std:input/outputstream and end accesses the last constant.
 static int	check_input(const std::string& filename, const std::string& s1)
 {
 	if (s1.empty())
@@ -39,9 +39,8 @@ static int	check_input(const std::string& filename, const std::string& s1)
 }
 
 // s2 can be empty, we remove every s1 occurence.
-// ifstream reads from a file, ofstream creates a file for writing.
-// istreambuf_iterator reads every char of infile until EOF
-// and store it in content.
+// ifstream opens the file in readmode, ofstream creates a file for writing or overwrites.
+// istreambuf_iterator reads every char of infile from start until EOF and stores it in content.
 int	main(int argc, char **argv)
 {
 	if (argc != 4)
@@ -62,6 +61,11 @@ int	main(int argc, char **argv)
 	infile.close();
 
 	std::string replaced = replace_string(content, s1, s2);
+	if (replaced.empty())
+	{
+		std::cerr << "Error: Couldn't create replacement string." << std::endl;
+		return (1);
+	}
 
 	std::ofstream outfile(filename + ".replace");
 	if (!outfile)
