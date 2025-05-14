@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   Weapon.cpp                                         :+:    :+:            */
+/*   main.cpp                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/04/11 18:05:01 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/01 16:33:22 by diwalaku      ########   odam.nl         */
+/*   Created: 2025/04/30 17:39:59 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/04/30 18:01:32 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Weapon.hpp"
+#include "../include/Harl.hpp"
 
-Weapon::Weapon(const std::string &type): type(type) {}
-
-const std::string& Weapon::getType() const
+int	main(int argc, char **argv)
 {
-	return (this->type);
-}
+	if (argc != 2)
+	{
+		std::cout << "[Invalid input]\n";
+		std::cout << "Not enough arguments for Harl to complain!" << std::endl;
+		return (0);
+	}
 
-void Weapon::setType(const std::string &newType)
-{
-	this->type = newType;
+	Harl harl;
+	
+	std::string level = argv[1];
+	harl.complain(level);
+
+	return (0);
 }

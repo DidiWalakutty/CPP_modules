@@ -6,14 +6,14 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/17 18:22:09 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/11 16:22:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/01 12:29:06 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Zombie.hpp"
 
 // Tries to alloc a new zombie on the heap.
-// If alloc fails, new thros a bad_alloc.
+// If alloc fails, new throws a bad_alloc. & avoids making a copy.
 Zombie*	newZombie(std::string name)
 {
 	try

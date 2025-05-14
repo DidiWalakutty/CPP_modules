@@ -1,4 +1,4 @@
-NAME 		= sed
+NAME 		= harlFilter
 
 # Configuration
 CC 			= c++
@@ -7,12 +7,8 @@ RM			= rm -rf
 HEADERS		= -I ./include
 
 # Source Files
-<<<<<<< HEAD
-SRC			= src/main.cpp
-=======
 SRC			= src/main.cpp \
-				src/Sed.cpp
->>>>>>> b7fc9b57c89d2cecb962810bfe636aefbe296165
+				src/Harl.cpp
 
 OBJDIR		= obj
 OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))

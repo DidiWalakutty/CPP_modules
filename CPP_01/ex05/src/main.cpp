@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   Weapon.cpp                                         :+:    :+:            */
+/*   main.cpp                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2025/04/11 18:05:01 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/01 16:33:22 by diwalaku      ########   odam.nl         */
+/*   Created: 2025/04/30 16:28:04 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/05/01 18:12:24 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Weapon.hpp"
+#include "../include/Harl.hpp"
 
-Weapon::Weapon(const std::string &type): type(type) {}
-
-const std::string& Weapon::getType() const
+int	main()
 {
-	return (this->type);
-}
+	Harl harl;
 
-void Weapon::setType(const std::string &newType)
-{
-	this->type = newType;
+	harl.complain("DEBUG");
+	harl.complain("INFO");
+	harl.complain("WARNING");
+	harl.complain("ERROR");
+
+	harl.complain("NOPE");
+	harl.complain("NOT HAPPENING");
+
+	return (0);
 }
