@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/14 18:56:51 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/14 19:23:28 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/15 13:16:37 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ Fixed& Fixed::operator=(const Fixed& copyAssign)
 	if (this != &copyAssign)
 		this->_fixedValue = copyAssign._fixedValue;
 	this->getRawBits(); // will only print the getRawBits string, not the value.
+	// Return a reference to the current object by dereferencing the this pointer.
 	return *this;
 }
 

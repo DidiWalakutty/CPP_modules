@@ -7,7 +7,8 @@
 //   Fixed b(a); → creates a new object with same values as 'a'.
 // Called when a new object is initialized from another.
 
-// Copy Assignment Operator:
+// Copy Assignment Operator:  
+// Fixed&: Returns a reference so assignments can be chained (e.g., a = b = c)
 //   b = a; → overwrites values from 'a' into existing object 'b'.
 // Called when assigning one object’s values to another.
 
