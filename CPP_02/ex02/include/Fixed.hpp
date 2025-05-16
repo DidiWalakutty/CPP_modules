@@ -34,7 +34,7 @@ class Fixed
 
 		/* Increment/Decrement - pre and post.
 		Pre - returns a reference to the modified object
-		Post - returns a copy of the og object, before modification (modifies internally) */ 
+		Post - returns a copy of the og object, before internal modification */ 
 		Fixed& operator++();	// Pre-increment = ++a
 		Fixed& operator--();	// Pre-decrement = --a
 		Fixed operator++(int);	// Post-increment = a++

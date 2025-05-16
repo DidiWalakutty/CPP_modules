@@ -6,12 +6,15 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:24:16 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/15 23:20:09 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/16 16:34:12 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Fixed.hpp"
 
+// To simulate fixed-point scaling, we convert with 256 (8 fractional bits).
+// It's rounded to reduce loss of precision so it behaves as close to real 
+// float math as possible
 int	main()
 {
 	Fixed		a;

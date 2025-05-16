@@ -6,23 +6,13 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/04/30 17:44:47 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/01 18:19:13 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/01 18:21:41 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Harl.hpp"
 
-Harl::Harl()
-{
-	std::cout << "[INITIALIZED]\n";
-	std::cout << "Harl is here. The complaints are strong with this one...\n" << std::endl;
-}
-
-Harl::~Harl()
-{
-	std::cout << "[LEFT]\n";
-	std::cout << "Harl out! May your code be bug-free!" << std::endl;
-}
+Harl::Harl() {}
 
 void Harl::debug()
 {
