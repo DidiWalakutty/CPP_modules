@@ -32,16 +32,16 @@ class Fixed
 		Fixed operator*(const Fixed& other) const;
 		Fixed operator/(const Fixed& other) const;
 
-		// Increment/Decrement - pre and post.
-		// Pre - returns a reference to the modified object
-		// Post - returns a copy of the og object, before modification (modifies internally)
+		/* Increment/Decrement - pre and post.
+		Pre - returns a reference to the modified object
+		Post - returns a copy of the og object, before modification (modifies internally) */ 
 		Fixed& operator++();	// Pre-increment = ++a
 		Fixed& operator--();	// Pre-decrement = --a
 		Fixed operator++(int);	// Post-increment = a++
 		Fixed operator--(int);	// Post-decrement = a--;
 
-		// Static min/max functions - return references to avoid copying.
-		// Provide both modifiable and const versions for flexibility.
+		/* Static min/max functions - return references to avoid copying.
+		Provide both modifiable and const versions for flexibility. */
 		static Fixed& min(Fixed& a, Fixed& b);
 		static Fixed& max(Fixed& a, Fixed& b);
 		static const Fixed& min(const Fixed& a, const Fixed& b);
