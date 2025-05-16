@@ -9,8 +9,6 @@
 
 // In fixed-point, numbers are stored in binary.
 // Fixed-point math avoids floating-point overhead while keeping decimal precision.
-// Shifting left by 8 bits multiplies by 2^8 (256), moving the integer into the higher bits.
-// Example: 10 << 8 = 10 * 256 = 2560.
 class Fixed
 {
 	private:
@@ -18,13 +16,13 @@ class Fixed
 		static const int _fractBits = 8;
 	
 	public:
-		Fixed();						// Default constructor
+		Fixed();
 		Fixed(const int fixedInt);		// Int constructor
 		Fixed(const float fixedFloat);	// Float constructor
-		Fixed(const Fixed& copy);		// Copy constructor
-		Fixed& operator=(const Fixed& copyAssign); // Copy assignment operator:
-									// Creates a temp Fixed object that goes out of scope after assignment.
-		~Fixed();						// Destructor
+		Fixed(const Fixed& copy);
+		Fixed& operator=(const Fixed& copyAssign);	// Copy assignment operator:
+													// Creates a temp Fixed object that goes out of scope after assignment.
+		~Fixed();
 
 		float	toFloat() const;
 		int		toInt() const;

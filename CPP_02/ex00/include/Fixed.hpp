@@ -4,14 +4,15 @@
 #include <iostream>
 
 // Copy Constructor:
-//   Fixed b(a); → creates a new object with same values as 'a'.
-// Called when a new object is initialized from another.
+//   Fixed b(a); → creates a new object as a copy of an existing one
+//                 and duplicates that data from 'a'.
 
 // Copy Assignment Operator:  
-// Fixed&: Returns a reference so assignments can be chained (e.g., a = b = c)
 //   b = a; → overwrites values from 'a' into existing object 'b'.
-// Called when assigning one object’s values to another.
+// Fixed&: Returns a reference so assignments can be chained (e.g., a = b = c)
 
+// Overloading: gives multiple functions/operators the same name, but different behavior
+//              depending on their parameters.
 class Fixed
 {
 	private:

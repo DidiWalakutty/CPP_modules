@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/14 19:35:14 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/15 15:13:08 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/16 17:39:00 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ Fixed::Fixed() : _fixedValue(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-// Shift the int left by 8 bits to move it into fixed-point format.
-// This stores the int correctly by reserving the lower 8 bits for the fractional part.
+// Shift int left by 8 bits to store it as fixed-point.
+// This moves int into higher bits, reserving lower 8 for decimals.
 Fixed::Fixed(const int fixedInt)
 {
 	std::cout << "Int constructor called" << std::endl;
 	this->_fixedValue = fixedInt << _fractBits;
 }
 
-// Multiply the float by 256 (1 << 8) to scale it up to fixed-point format
-// and use roundf to choose the closest int value that represents the fixed-point num accurately.
+// Multiply float by 256 (1 << 8) and round to convert to fixed-point.
+// This way we can store both int and fractional parts in one int value.
+// Uses roundf to choose the closest int value that represents the fixed-point num accurately.
 Fixed::Fixed(const float fixedFloat)
 {
 	std::cout << "Float constructor called" << std::endl;
@@ -53,6 +54,7 @@ Fixed::~Fixed()
 }
 
 // toFloat(): converts fixed-point back to float by dividing by 256 (1 << _fractBits).
+// When creating the float constructor, we multiplied it by 256 to fit in an int.
 float	Fixed::toFloat() const
 {
 	return (float)_fixedValue / (1 << _fractBits);
