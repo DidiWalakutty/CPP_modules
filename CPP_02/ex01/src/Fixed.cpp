@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/14 19:35:14 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/16 17:39:00 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/17 12:30:08 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ int		Fixed::toInt() const
 	return _fixedValue >> _fractBits;
 }
 
-// Tells the compiler how to print a Fixed object with << class Object.
-// Overloads << to print Fixed objects as floats.
-// 'os' holds the current stream (e.g. "a is ") and adds toFloat().
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 {
 	os << fixed.toFloat();

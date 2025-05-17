@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/15 15:24:29 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/16 16:40:15 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/17 12:29:12 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ int		Fixed::toInt() const
 	return _fixedValue >> _fractBits;
 }
 
-// Tells the compiler how to print a Fixed object with << 'class Object'
-// Overloads << to print Fixed objects as floats.
-// 'os' holds the current stream (e.g. "a is ") and adds toFloat().
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 {
 	os << fixed.toFloat();
@@ -125,7 +122,8 @@ Fixed Fixed::operator*(const Fixed& other) const
 
 /* We first multiply by 256 (left shift) so we don't lose precision.
    We then divide by the denominator's (other._fixedValue) value.
-   Long long to avoid overflow and store result in an int again.*/
+   Long long to avoid overflow and store result in an int again.
+*/
 Fixed Fixed::operator/(const Fixed& other) const
 {
 	Fixed result;
@@ -136,25 +134,25 @@ Fixed Fixed::operator/(const Fixed& other) const
 }
 
 /* Increment and Decrement Operators 
-	Pre = increment and use new value
-	Post = Use the value, then increment ()
+	Pre = increment and returns modified object
+	Post = returns old state, but increments ()
 	Smallest in/decrement is 1/256 (8 fract bits) = 0.00390625 in floating point.
 */
-// pre-increment ++a: increases by 1 and returns reference to the modified object
+// pre-increment ++a
 Fixed& Fixed::operator++()
 {
 	this->_fixedValue += 1;
 	return *this;
 }
 
-// pre-decrement --a: decreases by 1 and returns reference to the modified object
+// pre-decrement --a
 Fixed& Fixed::operator--()
 {
 	this->_fixedValue -= 1;
 	return *this;
 }
 
-// post-increment a++: saves current state, increments, returns old state
+// post-increment a++
 Fixed Fixed::operator++(int)
 {
 	Fixed temp(*this);
@@ -162,7 +160,7 @@ Fixed Fixed::operator++(int)
 	return temp;
 }
 
-// post-decrement a--: saves current state, decrements, returns old state
+// post-decrement a--
 Fixed Fixed::operator--(int)
 {
 	Fixed temp(*this);
@@ -170,8 +168,9 @@ Fixed Fixed::operator--(int)
 	return temp;
 }
 
-/* Static Min and Max Functions */
-// Returns a reference to the smaller of two modifiable Fixed objects
+/* Static Min and Max Functions
+   Returns a reference to the smaller of two modifiable or two const Fixed Objects 
+*/
 Fixed& Fixed::min(Fixed& a, Fixed& b)
 {
 	if (a < b)
@@ -179,7 +178,6 @@ Fixed& Fixed::min(Fixed& a, Fixed& b)
 	return b;
 }
 
-// Returns a reference to the larger of two modifiable Fixed objects
 Fixed& Fixed::max(Fixed& a, Fixed& b)
 {
 	if (a > b)
@@ -187,7 +185,6 @@ Fixed& Fixed::max(Fixed& a, Fixed& b)
 	return b;
 }
 
-// Returns a reference to the smaller of two const Fixed objects
 const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 {
 	if (a < b)
@@ -195,7 +192,6 @@ const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 	return b;
 }
 
-// Returns a reference to the larger of two const Fixed objects
 const Fixed& Fixed::max(const Fixed& a, const Fixed &b)
 {
 	if (a > b)

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/14 18:56:51 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/16 17:08:41 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/17 12:30:47 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Fixed::Fixed(const Fixed& copy)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	this->_fixedValue = copy._fixedValue;
-	this->getRawBits(); // will only print the getRawBits string, not the value.
+	this->getRawBits();
 }
 
 // Fixed& allows chaining assignments (a = b = c)
@@ -30,8 +30,7 @@ Fixed& Fixed::operator=(const Fixed& copyAssign)
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &copyAssign)
 		this->_fixedValue = copyAssign._fixedValue;
-	this->getRawBits(); // will only print the getRawBits string, not the value.
-	// Return a reference to the current object by dereferencing the 'this' pointer.
+	this->getRawBits();
 	return *this;
 }
 

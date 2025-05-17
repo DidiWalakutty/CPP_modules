@@ -34,11 +34,12 @@ class Fixed
 
 		/* Increment/Decrement - pre and post.
 		Pre - returns a reference to the modified object
-		Post - returns a copy of the og object, before internal modification */ 
-		Fixed& operator++();	// Pre-increment = ++a
-		Fixed& operator--();	// Pre-decrement = --a
-		Fixed operator++(int);	// Post-increment = a++
-		Fixed operator--(int);	// Post-decrement = a--;
+		Post - returns a copy of the og object, before internal modification 
+		*/ 
+		Fixed& operator++();	// ++a
+		Fixed& operator--();	// --a
+		Fixed operator++(int);	// a++
+		Fixed operator--(int);	// a--;
 
 		/* Static min/max functions - return references to avoid copying.
 		Provide both modifiable and const versions for flexibility. */
