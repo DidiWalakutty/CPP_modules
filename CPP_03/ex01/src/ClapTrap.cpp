@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:55:27 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/21 23:33:06 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/21 23:32:14 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void ClapTrap::printStatus() const
 	std::cout << "| HP: " << _hitPoints
 			  << " | EP: " << _energyPoints
 			  << " | AP: " << _attackDamage << " |\n"
-			  << "_________________________\n" << std::endl;
+			  << "__________________________________________________\n" << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target)

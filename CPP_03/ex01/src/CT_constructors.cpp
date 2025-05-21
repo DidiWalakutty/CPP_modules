@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   constructors.cpp                                   :+:    :+:            */
+/*   CT_constructors.cpp                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:18:34 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/21 23:31:32 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/21 23:31:09 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ ClapTrap::ClapTrap(const std::string& name) :
 	_name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout << BLUE << "ClapTrap constructor called for " << _name << RESET << std::endl;
+	printStatus();
 }
 
 ClapTrap::ClapTrap(const ClapTrap& copy) :
@@ -40,5 +41,5 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& assign)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << MAGENTA << "Claptrap destructor called for " << _name << RESET << std::endl;
+	std::cout << RED << "Claptrap destructor called for " << _name << RESET << std::endl;
 }
