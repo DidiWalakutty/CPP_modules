@@ -12,7 +12,7 @@ constexpr char CYAN[]   = "\033[36m";
 constexpr char RESET[]  = "\033[0m";
 
 
-// Changed private to public: Now the derived class ScavTrap can access and init them directly. 
+// Changed private to public: Now the derived class ScavTrap can access and init this Base class directly. 
 //		This keeps the inheritance clean and avoids unnecessary setters or duplicate variables.
 class ClapTrap
 {

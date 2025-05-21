@@ -3,6 +3,7 @@
 
 #include "ClapTrap.hpp"
 
+// Derived class from Base class ClapTrap
 class ScavTrap : public ClapTrap
 {
 	public:
