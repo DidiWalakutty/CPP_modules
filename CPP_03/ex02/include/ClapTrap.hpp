@@ -3,7 +3,6 @@
 #include <iostream>
 #include "color.hpp"
 
-
 // Changed private to public: Now the derived class ScavTrap can access and init this Base class directly. 
 //		This keeps the inheritance clean and avoids unnecessary setters or duplicate variables.
 class ClapTrap

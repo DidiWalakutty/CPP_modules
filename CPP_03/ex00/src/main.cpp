@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:15:24 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/22 14:44:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 21:06:01 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,33 @@
 
 int	main()
 {
-	{
-		std::cout << BG_WHITE << "Example 1" << RESET << std::endl;
-		ClapTrap	bot("Grogu");
+	// {
+	// 	std::cout << BG_WHITE << "Example 1\n" << RESET << std::endl;
+	// 	ClapTrap	bot("Grogu");
 	
-		bot.attack("Nazgul");
-		bot.takeDamage(5);
-		bot.beRepaired(10);
-	}
-	{
-		std::cout << BG_WHITE << "Example 2" << RESET << std::endl;
-		ClapTrap	bot("Sauron");
+	// 	bot.attack("Nazgul");
+	// 	bot.takeDamage(5);
+	// 	bot.beRepaired(10);
+	// }
+	// {
+	// 	std::cout << BG_WHITE << "Example 2\n" << RESET << std::endl;
+	// 	ClapTrap	bot("Sauron");
 
-		bot.attack("Frodo");
-		bot.takeDamage(20);
-		bot.beRepaired(10);
-		bot.attack("Sam");
-		bot.takeDamage(1);
+	// 	bot.attack("Frodo");
+	// 	bot.takeDamage(20);
+	// 	bot.beRepaired(10);
+	// 	bot.attack("Sam");
+	// 	bot.takeDamage(1);
+	// }
+	{
+		std::cout << BG_WHITE << "Example 3\n" << RESET << std::endl;
+		ClapTrap	bot("Dr. Who");
+		ClapTrap	bot2;
+		ClapTrap	bot3("Care Bear");
+
+		bot3 = bot;
+		bot3.attack("Dalek");
+		bot3.beRepaired(1);
 	}
 	return (0);
 }

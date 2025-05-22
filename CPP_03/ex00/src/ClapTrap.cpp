@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:55:27 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/22 14:44:42 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 21:02:28 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void ClapTrap::attack(const std::string& target)
 	}
 	else
 	{
-		std::cout << BRIGHT_YELLOW << ITALIC << _name << " can't attack. " << _name << " doesn't have any Energy or Hit Points available." << RESET << std::endl;
+		std::cout << BRIGHT_YELLOW << ITALIC << _name << " can't attack. Not enough Energy or Hit Points." << RESET << std::endl;
 		printStatus();
 	}
 }
@@ -47,7 +47,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 	}
 	else
 	{
-		std::cout << BRIGHT_RED << ITALIC << _name << "has died... It has no HP left." << RESET << std::endl;
+		std::cout << BRIGHT_RED << ITALIC << _name << " couldn't take any more damage... It has no HP left." << RESET << std::endl;
 		printStatus();
 	}
 }

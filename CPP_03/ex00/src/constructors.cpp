@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:18:34 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/22 15:13:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 21:10:06 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& assign)
 		_energyPoints = assign._energyPoints;
 		_attackDamage = assign._attackDamage;
 	}
+	std::cout << RED << "Claptrap's new name is: " << _name << RESET << std::endl;
 	printStatus();
 	return *this;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << BG_RED << "Claptrap destructor called for " << _name << RESET << std::endl;
+	std::cout << BG_RED << "ClapTrap destructor called for " << _name << RESET << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/22 14:16:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/22 15:13:12 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 21:35:25 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ ClapTrap::ClapTrap() :
 	_name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout << BLUE << UNDERLINE << "ClapTrap default constructor called for " << _name << RESET << std::endl;
-	printStatus();
 }
 
 ClapTrap::ClapTrap(const std::string& name) : 
 	_name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << BLUE << "ClapTrap constructor called for " << _name << RESET << std::endl;
+	std::cout << MAGENTA << "ClapTrap constructor called for " << _name << RESET << std::endl;
 	printStatus();
 }
 
@@ -47,14 +46,14 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& assign)
 		_energyPoints = assign._energyPoints;
 		_attackDamage = assign._attackDamage;
 	}
+	std::cout << RED << "ClapTrap's new name is: " << _name << RESET << std::endl;
 	printStatus();
 	return *this;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << RED << "Claptrap destructor called for " << _name << RESET << std::endl;
-	printStatus();
+	std::cout << RED << "ClapTrap destructor called for " << _name << RESET << std::endl;
 }
 
 /* 
@@ -83,6 +82,7 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy)
 {
 	std::cout << CYAN << "ScavTrap copy constructor called for " << _name << RESET << std::endl;
+	printStatus();
 }
 
 // We call ClapTrap's assignment operator to handle copying base attributes.
@@ -92,6 +92,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& assign)
 	std::cout << CYAN << "ScavTrap copy assignment constructor called for " << _name << RESET << std::endl;
 	if (this != &assign)
 		ClapTrap::operator=(assign);
+	std::cout << RED << "ScavTrap's new name is: " << _name << RESET << std::endl;
 	printStatus();
 	return *this;
 }
@@ -99,17 +100,14 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& assign)
 ScavTrap::~ScavTrap()
 {
 	std::cout << RED << "ScavTrap destructor called for " << _name << std::endl;
-	printStatus();
 }
-/*
-	FragTrap Part
-*/
+
 FragTrap::FragTrap() : ClapTrap()
 {
 	_hitPoints = 100;
 	_energyPoints = 100;
 	_attackDamage = 30;
-	std::cout << MAGENTA << "FragTrap default constructor called for " << _name << RESET << std::endl;
+	std::cout << CYAN << "FragTrap default constructor called for " << _name << RESET << std::endl;
 	printStatus();
 }
 
@@ -118,7 +116,7 @@ FragTrap::FragTrap(const std::string& name) : ClapTrap(name)
 	_hitPoints = 100;
 	_energyPoints = 100;
 	_attackDamage = 30;
-	std::cout << MAGENTA << "FragTrap constructor called for " << _name << RESET << std::endl;
+	std::cout << CYAN << "FragTrap constructor called for " << _name << RESET << std::endl;
 	printStatus();
 }
 
@@ -133,11 +131,12 @@ FragTrap& FragTrap::operator=(const FragTrap& assign)
 	std::cout << CYAN << "FragTrap copy assignment constructor called for " << _name << RESET << std::endl;
 	if (this != &assign)
 		ClapTrap::operator=(assign);
+	std::cout << RED << "FragTrap's new name is: " << _name << RESET << std::endl;
 	printStatus();
 	return *this;
 }
 
 FragTrap::~FragTrap()
 {
-	std::cout << RED << "FragTrap destructor called for " << _name << RESET << std::endl;
+	std::cout << RED << "FragTrap destructor called for " << _name << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:15:24 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/22 12:07:52 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 21:28:44 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	main()
 	// 	grogu.beRepaired(10);
 	// }
 	{
-		std::cout << MAGENTA << "\n---ScavTrap Test---\n" << RESET << std::endl;
+		std::cout << MAGENTA << "\n--- ScavTrap Test---\n" << RESET << std::endl;
 	
 		ScavTrap frodo("Frodo");
 	
 		frodo.attack("Boromir");
-		frodo.takeDamage(90);
+		frodo.takeDamage(70);
 		frodo.beRepaired(15);
 		frodo.guardGate();
 	}
@@ -41,6 +41,10 @@ int	main()
 	// 	ScavTrap assigned("Temp");
 
 	// 	assigned = drWho;
+	// 	assigned.attack("a Dalek");
+	// 	assigned.takeDamage(95);
+	// 	assigned.beRepaired(200);
+	// 	assigned.guardGate();
 	// }
 	return (0);
 }
