@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:18:34 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/22 14:58:55 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 15:13:50 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ ClapTrap::ClapTrap() :
 	_name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout << BLUE << UNDERLINE << "ClapTrap default constructor called for " << _name << RESET << std::endl;
+	printStatus();
 }
 
 ClapTrap::ClapTrap(const std::string& name) : 
 	_name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << BLUE << "ClapTrap default name constructor called for " << _name << RESET << std::endl;
+	std::cout << BLUE << "ClapTrap constructor called for " << _name << RESET << std::endl;
 	printStatus();
 }
 
@@ -30,6 +31,7 @@ ClapTrap::ClapTrap(const ClapTrap& copy) :
 	_energyPoints(copy._energyPoints), _attackDamage(copy._attackDamage)
 {
 	std::cout << "ClapTrap copy constructor called for " << _name << std::endl;
+	printStatus();
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& assign)
@@ -42,6 +44,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& assign)
 		_energyPoints = assign._energyPoints;
 		_attackDamage = assign._attackDamage;
 	}
+	printStatus();
 	return *this;
 }
 
