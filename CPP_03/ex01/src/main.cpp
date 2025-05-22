@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:15:24 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/21 23:36:09 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 12:07:52 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main()
 		ScavTrap frodo("Frodo");
 	
 		frodo.attack("Boromir");
-		frodo.takeDamage(150);
+		frodo.takeDamage(90);
 		frodo.beRepaired(15);
 		frodo.guardGate();
 	}

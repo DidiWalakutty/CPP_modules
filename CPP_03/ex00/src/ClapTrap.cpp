@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:55:27 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/21 23:33:06 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 12:04:53 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void ClapTrap::attack(const std::string& target)
 	}
 	else
 	{
-		std::cout << _name << " can't attack. " << _name << " doesn't have enough Energy or Hit Points available." << std::endl;
+		std::cout << _name << " can't attack. " << _name << " doesn't have any Energy or Hit Points available." << std::endl;
 		printStatus();
 	}
 }
