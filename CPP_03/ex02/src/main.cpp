@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:15:24 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/21 23:44:59 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 14:50:22 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	main()
 {
-	{
-		
-	}
+
 	return (0);
 }

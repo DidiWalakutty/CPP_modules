@@ -9,9 +9,8 @@ HEADERS		= -I ./include
 # Source Files
 SRC			=	src/main.cpp \
 					src/ClapTrap.cpp \
-					src/CT_constructors.cpp \
-					src/ScavTrap.cpp \
-					src/ST_constructors.cpp
+					src/constructors.cpp \
+					src/ScavTrap.cpp 
 
 OBJDIR		= obj
 OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))

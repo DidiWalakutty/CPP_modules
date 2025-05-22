@@ -1,5 +1,4 @@
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
+#pragma once
 
 #include "ClapTrap.hpp"
 
@@ -15,5 +14,3 @@ class ScavTrap : public ClapTrap
 		void attack(const std::string& target);	// Overwrites OG attack
 		void guardGate();
 };
-
-#endif

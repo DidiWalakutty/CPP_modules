@@ -1,4 +1,4 @@
-NAME		= 	fragtrap
+NAME		= 	scavtrap
 
 # Configuration
 CC			= c++
@@ -8,12 +8,10 @@ HEADERS		= -I ./include
 
 # Source Files
 SRC			=	src/main.cpp \
+					src/constructors.cpp \
 					src/ClapTrap.cpp \
 					src/ScavTrap.cpp \
-					src/FragTrap.cpp \
-					src/CT_constructors.cpp \
-					src/ST_constructors.cpp \
-					src/FT_constructors.cpp
+					src/FragTrap.cpp
 
 OBJDIR		= obj
 OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/21 19:55:27 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/05/21 23:32:14 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/05/22 14:45:28 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void ClapTrap::printStatus() const
 {
-	std::cout << "\n[" << _name << "'s Status]" << std::endl;
-	std::cout << "| HP: " << _hitPoints
-			  << " | EP: " << _energyPoints
-			  << " | AP: " << _attackDamage << " |\n"
-			  << "__________________________________________________\n" << std::endl;
+	std::cout << UNDERLINE << "[" << _name << "'s Status]" << std::endl;
+	std::cout << UNDERLINE << "| HP: " << _hitPoints
+			  << UNDERLINE << " | EP: " << _energyPoints
+			  << UNDERLINE << " | AP: " << _attackDamage << " |\n" << RESET << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -31,7 +30,7 @@ void ClapTrap::attack(const std::string& target)
 	}
 	else
 	{
-		std::cout << _name << " can't attack. " << _name << " doesn't have enough Energy or Hit Points available." << std::endl;
+		std::cout << BRIGHT_YELLOW << ITALIC << _name << " can't attack. " << _name << " doesn't have any Energy or Hit Points available." << RESET << std::endl;
 		printStatus();
 	}
 }
@@ -48,7 +47,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 	}
 	else
 	{
-		std::cout << RED << _name << "has died... It has no HP left." << RESET << std::endl;
+		std::cout << BRIGHT_RED << ITALIC << _name << "has died... It has no HP left." << RESET << std::endl;
 		printStatus();
 	}
 }
@@ -64,7 +63,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 	}
 	else
 	{
-		std::cout << _name << " couldn't repair itself, it has no EP or HP!";
+		std::cout << BRIGHT_GREEN << ITALIC << _name << " couldn't repair itself, it has no EP or HP!" << RESET << std::endl;
 		printStatus();
 	}
 }
