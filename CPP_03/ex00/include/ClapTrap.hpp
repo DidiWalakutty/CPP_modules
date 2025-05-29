@@ -6,14 +6,14 @@ class ClapTrap
 {
 	private:
 		std::string _name;
-		int _hitPoints;
-		int _energyPoints;
-		int	_attackDamage;
+		unsigned int _hitPoints;
+		unsigned int _energyPoints;
+		unsigned int _attackDamage;
 	
 	public:
 		ClapTrap();
-		ClapTrap(const std::string& name);	// & = reference
-		ClapTrap(const ClapTrap& copy);		// Claptrap& = passing existing obj by reference
+		ClapTrap(const std::string& name);
+		ClapTrap(const ClapTrap& copy);
 		ClapTrap& operator=(const ClapTrap& assign); // 1st &: returns ClapTrap& so we can a = b =c
 		~ClapTrap();								 // 2nd &: copy safely by reference
 

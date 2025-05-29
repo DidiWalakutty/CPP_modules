@@ -3,15 +3,15 @@
 #include <iostream>
 #include "color.hpp"
 
-// Changed private to public: Now the derived class ScavTrap can access and init this Base class directly. 
+// Changed private to protected: Now the derived class ScavTrap can access and init this Base class directly. 
 //		This keeps the inheritance clean and avoids unnecessary setters or duplicate variables.
 class ClapTrap
 {
 	protected:
 		std::string _name;
-		int _hitPoints;
-		int _energyPoints;
-		int	_attackDamage;
+		unsigned int _hitPoints;
+		unsigned int _energyPoints;
+		unsigned int _attackDamage;
 	
 	public:
 		ClapTrap();
