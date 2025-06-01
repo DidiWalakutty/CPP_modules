@@ -44,7 +44,7 @@ int	main()
 	// 		delete animals[i];
 	// }
 	{
-		std::cout << "\n--- Test 4: Cat Deep Copy and Brain Integrity ---\n" << std::endl;
+		std::cout << "\n--- Test 3: Cat Deep Copy and Brain Integrity ---\n" << std::endl;
 
 		// Create original Cat and fill ideas
 		Cat PurrBakka;
