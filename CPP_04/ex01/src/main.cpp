@@ -34,121 +34,56 @@ int	main()
 	// 			animals[i] = new Cat();
 	// 	}
 
+	// 	for (int i = 0; i < size; i++)
+	// 	{
+	// 		animals[i]->makeSound();
+	// 	}
+	//
 	// 	std::cout << "\n--- Deleting Animals ---\n" << std::endl;
 	// 	for (int i = 0; i < size; ++i)
 	// 		delete animals[i];
 	// }
-	// {
-	// 	std::cout << "\n--- Test 3: Deep Copy Constructor Tests ---\n" << std::endl;
-	// 	Dog a;
-	// 	a.setIdea(0, "Bark at intruders.");
-	// 	a.setIdea(1, "Roll over.");
-	// 	std::cout << std::endl;
-
-	// 	std::cout << UNDERLINE << "Testing Copy Constructor for Dog b: " << RESET << std::endl;
-	// 	Dog b(a); // Copy constructor
-	// 	b.setIdea(1, "Chew the sofa.");
-	// 	std::cout << std::endl;
-
-	// 	std::cout << "Dog a idea[0]: " << a.getIdea(0) << std::endl;
-	// 	std::cout << "Dog b idea[0]: " << b.getIdea(0) << std::endl;
-	// 	std::cout << std::endl;
-	// 	std::cout << "Dog a idea[1]: " << a.getIdea(1) << std::endl;
-	// 	std::cout << "Dog b idea[1]: " << b.getIdea(1) << std::endl;
-	// 	std::cout << std::endl;
-
-	// 	std::cout << "Brain address a: " << a.getBrain() << std::endl;
-	// 	std::cout << "Brain address b: " << b.getBrain() << std::endl;
-	// 	std::cout << std::endl;
-
-	// 	std::cout << UNDERLINE << "Testing Assignment Constructor for Dog c: \n" << RESET << std::endl;
-	// 	Dog c;
-	// 	std::cout << std::endl;
-
-	// 	c = a; // Assignment operator
-	// 	c.setIdea(0, "Steal socks.");
-
-	// 	std::cout << std::endl;
-	// 	std::cout << "Dog a idea[0]: " << a.getIdea(0) << std::endl;
-	// 	std::cout << "Dog c idea[0]: " << c.getIdea(0) << std::endl;
-	// 	std::cout << std::endl;
-	// 	std::cout << "Dog a idea[1]: " << a.getIdea(1) << std::endl;
-	// 	std::cout << "Dog c idea[1]: " << c.getIdea(1) << std::endl;
-	// 	std::cout << std::endl;
-	// 	std::cout << "Brain address a: " << a.getBrain() << std::endl;
-	// 	std::cout << "Brain address c: " << c.getBrain() << std::endl;
-	// 	std::cout << std::endl;
-	// }
 	{
-		std::cout << "\n--- Test 4: Full Brain Integrity at Scale ---\n" << std::endl;
+		std::cout << "\n--- Test 4: Cat Deep Copy and Brain Integrity ---\n" << std::endl;
 
-		/* 
-			Dog test 
-		*/
-		std::cout << BG_BLUE << "Dog Test" << RESET << std::endl;
-		Dog ChewBakka;
-		for (int i = 0; i < 20; ++i)
-		{
-			if (i % 2 == 0)
-				ChewBakka.setIdea(i, "Food");
-			else
-				ChewBakka.setIdea(i, "SQUIRREL!");
-		}
-
-		std::cout << "Print Ideas up to 24" << std::endl;
-		for (int i = 0; i < 24; ++i)
-		{
-			std::string idea = ChewBakka.getIdea(i);
-			if (idea == "")
-				std::cout << "ChewBakka's idea[" << i << "]: no clue..." << std::endl;
-			else
-				std::cout << "ChewBakka's idea[" << i << "]: " << idea << std::endl;
-		}
-
-		// Deep copy verification for Dog
-		std::cout << UNDERLINE << "\nTesting Deep Copy for ChewBakka" << RESET << std::endl;
-		Dog dogCopy = ChewBakka;
-		dogCopy.setIdea(0, "Chase the ball");
-
-		std::cout << "ChewBakka idea[0]: " << ChewBakka.getIdea(0) << std::endl;
-		std::cout << "dogCopy idea[0]: " << dogCopy.getIdea(0) << std::endl;
-
-		std::cout << "ChewBakka Brain address: " << ChewBakka.getBrain() << std::endl;
-		std::cout << "dogCopy Brain address: " << dogCopy.getBrain() << std::endl;
-
-		/* 
-			Cat test 
-		*/
-		std::cout << BG_BLUE << "\nCat Test" << RESET << std::endl;
-		Cat Salem;
+		// Create original Cat and fill ideas
+		Cat PurrBakka;
 		for (int i = 0; i < 100; ++i)
 		{
 			if (i % 3 == 0 && i % 5 == 0)
-				Salem.setIdea(i, "Sit on the human's keyboard");
+				PurrBakka.setIdea(i, "Sit on the human's keyboard");
 			else if (i % 3 == 0)
-				Salem.setIdea(i, "Steal the cheese");
+				PurrBakka.setIdea(i, "Steal the cheese");
 			else if (i % 5 == 0)
-				Salem.setIdea(i, "Stare into the void after a long nap");
+				PurrBakka.setIdea(i, "Stare into the void after a long nap");
 			else
-				Salem.setIdea(i, "Plot World Domination");
+				PurrBakka.setIdea(i, "Plot World Domination");
 		}
 
 		for (int i = 0; i < 100; ++i)
 		{
-			std::cout << "Salem's idea[" << i << "]: " << Salem.getIdea(i) << std::endl;
+			std::cout << "PurrBakka's idea[" << i << "]: " << PurrBakka.getIdea(i) << std::endl;
 		}
 
-		// Deep copy verification for Cat
-		std::cout << UNDERLINE << "\nTesting Deep Copy for Salem" << RESET << std::endl;
-		Cat catCopy = Salem;
+		// Copy constructor test
+		std::cout << UNDERLINE << "\nTesting Copy Constructor for catCopy:" << RESET << std::endl;
+		Cat catCopy(PurrBakka);
+
+		// Change some ideas in copy
 		catCopy.setIdea(0, "Climb the curtains");
+		catCopy.setIdea(15, "Nap all day");
 
-		std::cout << std::endl;
-		std::cout << "Salem idea[0]: " << Salem.getIdea(0) << std::endl;
+		// Show that original is unaffected
+		std::cout << "\nAfter modifying catCopy's ideas:" << std::endl;
+		std::cout << "PurrBakka idea[0]: " << PurrBakka.getIdea(0) << std::endl;
 		std::cout << "catCopy idea[0]: " << catCopy.getIdea(0) << std::endl;
-
 		std::cout << std::endl;
-		std::cout << "Salem Brain address: " << Salem.getBrain() << std::endl;
+		std::cout << "PurrBakka idea[15]: " << PurrBakka.getIdea(15) << std::endl;
+		std::cout << "catCopy idea[15]: " << catCopy.getIdea(15) << std::endl;
+
+		// Show brain addresses to prove deep copy
+		std::cout << "\nBrain addresses:" << std::endl;
+		std::cout << "PurrBakka Brain address: " << PurrBakka.getBrain() << std::endl;
 		std::cout << "catCopy Brain address: " << catCopy.getBrain() << std::endl;
 		std::cout << std::endl;
 	}

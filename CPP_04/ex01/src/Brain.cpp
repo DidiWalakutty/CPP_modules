@@ -35,15 +35,18 @@ Brain::~Brain()
 
 void Brain::setIdea(int index, const std::string& idea)
 {
-	if (index >= 0 && index < 100)
-		ideas[index] = idea;
-	else
-		std::cerr << BG_MAGENTA << "[Brain] Invalid index: " << index << RESET << std::endl;
+	if (index < 0 || index >= 100)
+	{
+		std::cerr << BG_MAGENTA << "[Brain] Error: Index " <<index << " is out of bounds, idea was not created!" << RESET << std::endl;
+		return ;
+	}
+	ideas[index] = idea;
+
 }
 
 std::string Brain::getIdea(int index) const
 {
 	if (index >= 0 && index < 100)
 		return ideas[index];
-	return "[Invalid index]";
+	return "[Invalid index or Out of Bounds]";
 }
