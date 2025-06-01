@@ -4,7 +4,6 @@
 #include "../include/color.hpp"
 
 // Use virtual to enable runtime polymorphism (program calls the correct overridden function)
-// even when using a const Animal*
 //
 // Without a virtual destructor, the derived class destructor won't be called
 // and will result in undefined behavior. This way the entire object will be destroyed.

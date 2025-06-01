@@ -2,8 +2,8 @@
 
 Dog::Dog()
 {
-	std::cout << GREEN << "Dog's Constructor was called." << RESET << std::endl;
 	this->type = "Dog";
+	std::cout << GREEN << "Dog's Constructor was called." << RESET << std::endl;
 }
 
 Dog::Dog (const Dog& copy) : Animal(copy)
@@ -23,10 +23,10 @@ Dog& Dog::operator=(const Dog& assign)
 
 Dog::~Dog()
 {
-	std::cout << BG_RED << type << " Destructor was called." << RESET << std::endl;
+	std::cout << BG_RED << "Dog Destructor was called." << RESET << std::endl;
 }
 
 void Dog::makeSound() const
 {
-	std::cout << GREEN << type << " says a pawdorable: woof!" << RESET << std::endl; 
+	std::cout << GREEN << "Dog sounds a pawdorable: woof!" << RESET << std::endl; 
 }

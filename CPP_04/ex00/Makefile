@@ -11,8 +11,8 @@ SRC			=	src/main.cpp \
 					src/Animal.cpp \
 					src/Cat.cpp \
 					src/Dog.cpp \
-					# src/WrongAnimal.cpp \
-					# src/WrongCat.cpp
+					src/WrongAnimal.cpp \
+					src/WrongCat.cpp
 
 OBJDIR		= obj
 OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))

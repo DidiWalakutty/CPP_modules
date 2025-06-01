@@ -2,8 +2,8 @@
 
 Cat::Cat()
 {
-	std::cout << CYAN << "Cat's Default constructor was called." << RESET << std::endl;
 	this->type = "Cat";
+	std::cout << CYAN << "Cat's Default constructor was called." << RESET << std::endl;
 }
 
 Cat::Cat (const Cat& copy) : Animal(copy)
@@ -23,10 +23,10 @@ Cat& Cat::operator=(const Cat& assign)
 
 Cat::~Cat()
 {
-	std::cout << BG_RED << type << " Destructor was called." << RESET << std::endl;
+	std::cout << BG_RED << "Cat Destructor was called." << RESET << std::endl;
 }
 
 void Cat::makeSound() const
 {
-	std::cout << CYAN << type << " says a purrrfect: meow!" << RESET << std::endl;
+	std::cout << CYAN << "Cat sounds a purrrfect: meow!" << RESET << std::endl;
 }
