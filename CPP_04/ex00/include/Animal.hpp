@@ -1,7 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include "../include/color.hpp"
+#include <string>
+#include "color.hpp"
 
 /*
 	Virtual Destructor: Ensures the derived class destructor is called correctly during delete.

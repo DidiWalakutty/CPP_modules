@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "color.hpp"
+#include <string>
 
 class WrongAnimal
 {

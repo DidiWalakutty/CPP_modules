@@ -1,6 +1,8 @@
 #pragma once
 
 #include "WrongAnimal.hpp"
+#include "color.hpp"
+#include <iostream>
 
 class WrongCat : public WrongAnimal
 {

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ClapTrap.hpp"
+#include "color.hpp"
+#include <iostream>
+#include <string>
 
 // Derived class from Base class ClapTrap
 class ScavTrap : public ClapTrap

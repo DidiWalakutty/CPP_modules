@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include "color.hpp"
 
 // Changed private to protected: Now the derived class ScavTrap can access and init this Base class directly. 

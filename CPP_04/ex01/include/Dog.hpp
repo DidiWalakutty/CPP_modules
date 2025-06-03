@@ -1,7 +1,10 @@
 #pragma once
 
-#include "../include/Animal.hpp"
-#include "../include/Brain.hpp"
+#include "Animal.hpp"
+#include "Brain.hpp"
+#include "color.hpp"
+#include <iostream>
+#include <string>
 
 class Dog : public Animal
 {

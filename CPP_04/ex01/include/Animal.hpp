@@ -1,7 +1,8 @@
 #pragma once
 
+#include <string>
 #include <iostream>
-#include "../include/color.hpp"
+#include "color.hpp"
 
 // Use virtual to enable runtime polymorphism (program calls the correct overridden function)
 //

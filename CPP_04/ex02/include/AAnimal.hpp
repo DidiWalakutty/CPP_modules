@@ -1,7 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include "../include/color.hpp"
+#include <string>
+#include "color.hpp"
 
 /* 	= 0: Pure virtual function — it now must be overridden in derived classes.
 		Enables polymorphism: calls the right function at runtime based on object type.

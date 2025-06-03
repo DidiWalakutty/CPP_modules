@@ -1,6 +1,10 @@
 #pragma once
 
+#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "color.hpp"
+#include <iostream>
+#include <string>
 
 class FragTrap : public ClapTrap
 {

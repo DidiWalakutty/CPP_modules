@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../include/AAnimal.hpp"
-#include "../include/Brain.hpp"
+#include "AAnimal.hpp"
+#include "Brain.hpp"
+#include <iostream>
+#include <string>
 
 class Dog : public AAnimal
 {

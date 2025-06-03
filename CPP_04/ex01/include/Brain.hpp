@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include "../include/color.hpp"
+#include "color.hpp"
 
 class Brain
 {
