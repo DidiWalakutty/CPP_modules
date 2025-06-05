@@ -15,7 +15,8 @@ Brain::Brain(const Brain& copy)
 }
 
 /*
-	Checks for self-assignment, like Brain b; b = b;
+	Checks and prevents self-assignment, like Brain b; b = b;
+	If they're the same address, skip copying
 */
 Brain& Brain::operator=(const Brain& assign)
 {
