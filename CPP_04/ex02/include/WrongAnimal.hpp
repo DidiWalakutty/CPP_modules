@@ -1,8 +1,8 @@
 #pragma once
 
+#include <string>
 #include <iostream>
 #include "color.hpp"
-#include <string>
 
 class WrongAnimal
 {
@@ -15,6 +15,6 @@ class WrongAnimal
 		WrongAnimal& operator=(const WrongAnimal& assign);
 		~WrongAnimal();
 	
-		std::string getType() const;
 		void makeSound() const;
+		std::string getType() const;
 };

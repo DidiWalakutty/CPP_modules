@@ -3,7 +3,7 @@
 #include "../include/WrongCat.hpp"
 
 /*
-	An abstract class is a class that: can't be instantiated,
+	An abstract class is a class that: can't be instantiated (create an obj from a class directly),
 		is meant to be inherited from, has at least one pure virtual function.
 
 	Virtual function: is a function thas has no implementation in the base class

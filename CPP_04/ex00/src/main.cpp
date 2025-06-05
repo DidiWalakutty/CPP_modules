@@ -12,8 +12,10 @@
 */
 int	main()
 {
+	// Subject Main Test will have leaks, because it's not using delete
 	// {
 	// 	std::cout << BG_MAGENTA << "\n--- Subject's Main Test ---\n" << RESET << std::endl;
+		
 
 	// 	const Animal* meta = new Animal();
 	// 	const Animal* j = new Dog();
