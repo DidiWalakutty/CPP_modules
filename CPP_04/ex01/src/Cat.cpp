@@ -12,22 +12,22 @@ Cat::Cat()
 	the actual Brain object it points to — not just the address.
 
 	Then, we pass that Brain object into the Brain copy constructor to 
-	create a full copy (clone) of the original Brain.
+	create a full copy (clone) of the original Brain - Deep Copy.
 */
 Cat::Cat (const Cat& copy) : Animal(copy)
 {
 	std::cout << CYAN << "[Cat] Copy constructor was called." << RESET << std::endl;
-	this->brain = new Brain(*copy.brain);	// deep copy of Brain: dereference the pointer so it's the actual Brain object.
+	this->brain = new Brain(*copy.brain);
 }
 Cat& Cat::operator=(const Cat& assign)
 {
 	std::cout << CYAN << "[Cat] Assign constructor was called." << RESET << std::endl;
 	if (this != &assign)
 	{
-		Animal::operator=(assign);	// Copy base class part
-		if (this->brain)			// If the curent obj already has a brain, delete b/o memory leaks
+		Animal::operator=(assign);
+		if (this->brain)
 			delete this->brain;
-		this->brain = new Brain(*assign.brain);  // Deep Copy: makes a new copy of the other Dog's brain
+		this->brain = new Brain(*assign.brain);
 	}
 	return *this;
 }

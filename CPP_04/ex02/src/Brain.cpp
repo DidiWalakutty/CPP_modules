@@ -14,9 +14,6 @@ Brain::Brain(const Brain& copy)
 		ideas[i] = copy.ideas[i];
 }
 
-/*
-	CHecks for self-assignment, like Brain b; b = b;
-*/
 Brain& Brain::operator=(const Brain& assign)
 {
 	std::cout << MAGENTA << "[Brain] Assign constructor was called." << RESET << std::endl;

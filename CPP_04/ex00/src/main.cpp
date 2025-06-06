@@ -12,22 +12,6 @@
 */
 int	main()
 {
-	// Subject Main Test will have leaks, because it's not using delete
-	// {
-	// 	std::cout << BG_MAGENTA << "\n--- Subject's Main Test ---\n" << RESET << std::endl;
-		
-
-	// 	const Animal* meta = new Animal();
-	// 	const Animal* j = new Dog();
-	// 	const Animal* i = new Cat();
-
-	// 	std::cout << j->getType() << " " << std::endl;
-	// 	std::cout << i->getType() << " " << std::endl;
-
-	// 	i->makeSound();
-	// 	j->makeSound();
-	// 	meta->makeSound();
-	// }
 	{
 		std::cout << BG_CYAN << "\n--- Regular Polymorphism test ---\n" << RESET << std::endl;
 
