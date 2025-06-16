@@ -2,21 +2,6 @@
 #include "../include/Bureaucrat.hpp"
 #include "../include/Form.hpp"
 
-// int main() 
-// {
-//     // Bureaucrat alice("Alice", 5);
-//     // Bureaucrat bob("Bob", 100);
-
-//     // Form leaveRequest("Leave Request Form", 50, 30);  // Needs grade 50 to sign
-
-//     // std::cout << "\n--- Trying to sign Leave Form ---\n";
-
-//     // alice.signForm(leaveRequest); // Should succeed (5 <= 50)
-//     // bob.signForm(leaveRequest);   // Should fail (100 > 50)
-// 	// std::cout << std::endl;
-//     return 0;
-// }
-
 int main() 
 {
 	std::cout << std::endl;
@@ -64,8 +49,9 @@ int main()
 	// 	Bureaucrat bob("Bob", 10);
 
 	// 	std::cout << "\n--- Before assignment ---" << std::endl;
-	// 	std::cout << "Alice: " << alice << std::endl;
-	// 	std::cout << "Bob: " << bob << std::endl;
+	// 	std::cout << alice << std::endl;
+	// 	std::cout << bob << std::endl;
+	// 	std::cout << std::endl;
 
 	// 	// Assignment test: assign bob to alice
 	// 	alice = bob;
@@ -73,6 +59,7 @@ int main()
 	// 	std::cout << "\n--- After assignment (alice = bob) ---" << std::endl;
 	// 	std::cout << "Alice: " << alice << " - should now have Bob’s grade" << std::endl;
 	// 	std::cout << "Bob: " << bob << std::endl;
+	// 	std::cout << std::endl;
 
 	// 	// Create a form
 	// 	Form passportForm("Passport Form", 20, 10);
