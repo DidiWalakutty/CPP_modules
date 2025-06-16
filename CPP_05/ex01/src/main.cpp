@@ -24,7 +24,7 @@ int main()
     try 
 	{
         Bureaucrat maleficent("Maleficent", 2);
-        Bureaucrat bob("Billy Bob", 50);
+        Bureaucrat bob("Billy Bob", 45);
 
         Form taxForm("Tax Return", 45, 30);
         Form secretDoc("Top Secret", 2, 1);
