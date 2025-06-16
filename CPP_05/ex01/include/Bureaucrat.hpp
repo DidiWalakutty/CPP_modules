@@ -5,7 +5,7 @@
 #include <exception>
 #include "color.hpp"
 
-class Form;
+class Form; // Forward declaration
 
 class Bureaucrat
 {
@@ -20,7 +20,7 @@ class Bureaucrat
 		Bureaucrat& operator=(const Bureaucrat& assign);
 		~Bureaucrat();
 
-		const std::string& getname() const;
+		const std::string& getName() const;
 		int getGrade() const;
 
 		void incrementGrade();
@@ -31,13 +31,13 @@ class Bureaucrat
 		class GradeTooHighException: public std::exception
 		{
 			public:
-				const char* what() const throw();
+				const char* what() const noexcept;
 		};
 
 		class GradeTooLowException: public std::exception
 		{
 			public:
-				const char* what() const throw();
+				const char* what() const noexcept;
 		};
 };
 

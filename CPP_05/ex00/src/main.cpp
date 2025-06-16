@@ -31,7 +31,7 @@ int main()
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
-
+	
 	// Test 3
 	std::cout << std::endl;
 	std::cout << BG_GREEN << "---- Test 3: Too Low Grade ----" << RESET << std::endl;
@@ -43,8 +43,9 @@ int main()
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
-
+	
 	// Test 4
+	// The destructor is called before the catch runs.
 	std::cout << std::endl;
 	std::cout << BG_GREEN << "---- Test 4: Increment Over Limit ----" << RESET << std::endl;
 	try 

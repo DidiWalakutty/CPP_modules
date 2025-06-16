@@ -6,9 +6,12 @@
 #include "color.hpp"
 
 /*
-	Exception classes (GradeTooHighException / GradeTooLowException) inherit from std::exception,
-	which lets them be caught with catch (std::exception& e).
-	They override the what() method to return a message describing the error.
+	Exception classes (GradeTooHigh/GradeTooLow) inherit from 
+	std::exception to enable error handling with try/catch.
+	We override what() to return a custom error message that explains what went wrong.
+	Catching by reference (std::exception& e) avoids copies and lets us access that message directly.
+
+	The const noexcept guarantees it won't throw additional exceptions.
 */
 class Bureaucrat
 {
@@ -23,7 +26,7 @@ class Bureaucrat
 		Bureaucrat& operator=(const Bureaucrat& assign);
 		~Bureaucrat();
 
-		const std::string& getname() const;
+		const std::string& getName() const;
 		int getGrade() const;
 
 		void incrementGrade();
@@ -32,13 +35,13 @@ class Bureaucrat
 		class GradeTooHighException: public std::exception
 		{
 			public:
-				const char* what() const throw();
+				const char* what() const noexcept;
 		};
 
 		class GradeTooLowException: public std::exception
 		{
 			public:
-				const char* what() const throw();
+				const char* what() const noexcept;
 		};
 };
 

@@ -38,7 +38,7 @@ Bureaucrat::~Bureaucrat()
 }
 
 // Getters
-const std::string& Bureaucrat::getname() const
+const std::string& Bureaucrat::getName() const
 {
 	return this->_name;
 }
@@ -63,7 +63,7 @@ void Bureaucrat::decrementGrade()
 	_grade++;
 }
 
-// Exception Messages
+// Exception Messages: where what() gets overridden
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return "Grade too high!";
@@ -77,6 +77,6 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 // Operator << overload
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
 {
-	os << b.getname() << ", bureaucrat grade " << b.getGrade() << ".";
+	os << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
 	return (os);
 }

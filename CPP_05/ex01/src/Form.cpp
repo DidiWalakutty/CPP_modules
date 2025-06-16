@@ -10,7 +10,7 @@ Form::Form() : _name("Default"), _isSigned(false), _gradeToSign(150), _gradeToEx
 Form::Form(const std::string& name, int signGrade, int executeGrade)
 	: _name(name), _isSigned(false), _gradeToSign(signGrade), _gradeToExecute(executeGrade)
 {
-	std::cout << YELLOW << "[Form] Default Name constructor was called for: " << _name << RESET << std::endl;
+	std::cout << BLUE << "[Form] Default Name constructor was called for: " << _name << RESET << std::endl;
 	if (signGrade < 1 || executeGrade < 1)
 		throw GradeTooHighException();
 	if (signGrade > 150 || executeGrade > 150)
