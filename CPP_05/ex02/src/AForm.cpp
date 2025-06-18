@@ -2,6 +2,11 @@
 #include "../include/Bureaucrat.hpp"
 #include "../include/color.hpp"
 
+/*
+	Because the executeFormAction() is a pure virtual function,
+	we don't need to implement it in this .cpp
+*/
+
 AForm::AForm() : _name("Default"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150)
 {
 	std::cout << CYAN << "[AForm] Default constructor was called for: " << _name << RESET << std::endl;
@@ -67,6 +72,19 @@ void AForm::beSigned(const Bureaucrat& b)
 	_isSigned = true;	
 }
 
+/*
+	This function checks if the form is signed and if the Bureaucrat's 
+	execute grade is high enough. If so, it'll execute the action for that form.
+*/
+void AForm::execute(const Bureaucrat& executor) const
+{
+	if (!this->_isSigned)
+		throw FormNotSignedException();
+	if (executor.getGrade() > this->_gradeToExecute)
+		throw GradeTooLowException();
+	this->executeFormAction();
+}
+
 // Execptions
 const char* AForm::GradeTooHighException::what() const throw()
 {
@@ -76,6 +94,11 @@ const char* AForm::GradeTooHighException::what() const throw()
 const char* AForm::GradeTooLowException::what() const throw()
 {
 	return "AForm grade too low!";
+}
+
+const char* AForm::FormNotSignedException::what() const throw()
+{
+	return "Aform is unsigned!";
 }
 
 // Operator << overload

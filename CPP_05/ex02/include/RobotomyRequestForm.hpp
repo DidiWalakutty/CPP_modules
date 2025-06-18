@@ -3,11 +3,13 @@
 #include "AForm.hpp"
 #include "color.hpp"
 #include <string>
+#include <cstdlib>	// for randomization: rand() and srand()
+#include <ctime>	// for time()
 
 class RobotomyRequestForm : public AForm
 {
 	private:
-		const std::string _target;
+		std::string _target;
 
 	public:
 		RobotomyRequestForm();

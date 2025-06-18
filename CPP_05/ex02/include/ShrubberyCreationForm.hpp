@@ -3,11 +3,12 @@
 #include "AForm.hpp"
 #include "color.hpp"
 #include <string>
+#include <fstream>
 
 class ShrubberyCreationForm : public AForm
 {
 	private:
-		const std::string _target;
+		std::string _target;
 
 	public:
 		ShrubberyCreationForm();
