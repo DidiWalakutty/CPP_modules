@@ -32,6 +32,7 @@ class Bureaucrat
 		void incrementGrade();
 		void decrementGrade();
 
+		// exceptions
 		class GradeTooHighException: public std::exception
 		{
 			public:

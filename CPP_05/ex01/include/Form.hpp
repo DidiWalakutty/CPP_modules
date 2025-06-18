@@ -30,7 +30,6 @@ class Form
 
 		void beSigned(const Bureaucrat& b);
 
-		//expections
 		class GradeTooHighException : public std::exception
 		{
 			public:
