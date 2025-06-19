@@ -10,6 +10,8 @@ int main()
 {
     Intern someRandomIntern;
     AForm* form;
+	Bureaucrat didi("Didi", 1);
+	AForm* form2;
 	std::cout << std::endl; 
 
     form = someRandomIntern.makeForm("robotomy request", "Bender");
@@ -17,6 +19,8 @@ int main()
 	std::cout << std::endl; 
 
     form = someRandomIntern.makeForm("presidential request", "Alice");
+	didi.signForm(*form);
+	didi.executeForm(*form);
     delete form;
 	std::cout << std::endl; 
 
@@ -24,8 +28,8 @@ int main()
     delete form;
 	std::cout << std::endl; 
 
-    form = someRandomIntern.makeForm("unknown form", "Nobody");  // should print error and return nullptr
-    delete form;  // safe even if nullptr
+    form2 = someRandomIntern.makeForm("unknown form", "Nobody");  // should print error and return nullptr
+    delete form2;  // safe even if nullptr
 
     return 0;
 }
