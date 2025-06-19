@@ -1,4 +1,3 @@
-#include "../include/color.hpp"
 #include "../include/AForm.hpp"
 #include "../include/Intern.hpp"
 #include "../include/Bureaucrat.hpp"
@@ -8,16 +7,18 @@
 
 int main()
 {
-    Intern someRandomIntern;
+	std::cout << std::endl;
     AForm* form;
-	Bureaucrat didi("Didi", 1);
 	AForm* form2;
+    Intern someRandomIntern;
 	std::cout << std::endl; 
-
+	
     form = someRandomIntern.makeForm("robotomy request", "Bender");
     delete form;
 	std::cout << std::endl; 
-
+	
+	Bureaucrat didi("Didi", 1);
+	std::cout << didi << std::endl;
     form = someRandomIntern.makeForm("presidential request", "Alice");
 	didi.signForm(*form);
 	didi.executeForm(*form);
@@ -29,7 +30,8 @@ int main()
 	std::cout << std::endl; 
 
     form2 = someRandomIntern.makeForm("unknown form", "Nobody");  // should print error and return nullptr
-    delete form2;  // safe even if nullptr
+    delete form2;  // safe, even if nullptr
+	std::cout << std::endl; 
 
     return 0;
 }
