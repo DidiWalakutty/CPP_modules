@@ -1,4 +1,3 @@
-#include "../include/color.hpp"
 #include "../include/AForm.hpp"
 #include "../include/Bureaucrat.hpp"
 #include "../include/RobotomyRequestForm.hpp"
@@ -39,7 +38,8 @@ int main()
 
 		// // Try to execute unsigned form (expect error)
         std::cout << "\n--- Try executing unsigned PardonForm ---" << std::endl;
-        dave.executeForm(pardonForm);  // Should throw error: not signed
+        dave.executeForm(pardonForm);
+		darth.executeForm(pardonForm);
 
 		// // --- Presidential Pardon Form ---
         std::cout << "\n--- PresidentialPardonForm | 25 | 5 ---" << std::endl;
@@ -48,7 +48,7 @@ int main()
     
         // --- Failure Case ---
         std::cout << "\n--- Try executing form with low-grade bureaucrat ---" << std::endl;
-        dave.signForm(shrubForm);      // Should fail
+        dave.signForm(shrubForm);
         dave.executeForm(shrubForm);
 		std::cout << std::endl;
     } 

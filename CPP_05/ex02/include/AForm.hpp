@@ -30,7 +30,7 @@ class AForm
 
 		void beSigned(const Bureaucrat& b);
 		void execute(Bureaucrat const& executor) const;
-		virtual void executeFormAction() const = 0;		// Pure Virtual: every subclass needs to define it
+		virtual void executeFormAction() const = 0;		// Pure Virtual: every subclass needs to define its own action
 
 		class GradeTooHighException : public std::exception
 		{

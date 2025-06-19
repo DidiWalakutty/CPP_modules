@@ -44,6 +44,6 @@ void RobotomyRequestForm::executeFormAction() const
 	}
 	else
 	{
-		std::cout << BG_GREEN << "Robotomy was unsuccessfull on " << _target << RESET << std::endl;
+		std::cout << BG_GREEN << "Robotomy was unsuccessful on " << _target << RESET << std::endl;
 	}
 }
