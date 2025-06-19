@@ -1,4 +1,4 @@
-NAME		= 	forms
+NAME		= 	intern
 
 # Configuration
 CC			= c++
@@ -12,7 +12,8 @@ SRC			=	src/main.cpp \
 					src/AForm.cpp \
 					src/PresidentialPardonForm.cpp \
 					src/RobotomyRequestForm.cpp \
-					src/ShrubberyCreationForm.cpp
+					src/ShrubberyCreationForm.cpp \
+					src/Intern.cpp
 
 OBJDIR		= obj
 OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))
