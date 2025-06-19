@@ -15,6 +15,7 @@
 class Intern
 {
 	private:
+		// Pointer to a function that takes a const string reference and returns a pointer to an AForm.
 		using FormFn = AForm* (*)(const std::string& target);
 		static const FormFn  formFn[3];
 		static const std::string formType[3];
