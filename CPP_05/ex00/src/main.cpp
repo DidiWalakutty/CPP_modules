@@ -22,7 +22,7 @@ int main()
 
 	// Test 2
 	std::cout << std::endl;
-	std::cout << BG_GREEN << "---- Test 2: Too High Grade ----" << RESET << std::endl;
+	std::cout << BG_GREEN << "---- Test 2: Grade Too High ----" << RESET << std::endl;
 	try 
 	{
 		Bureaucrat b2("TooHigh", 0);
@@ -34,7 +34,7 @@ int main()
 	
 	// Test 3
 	std::cout << std::endl;
-	std::cout << BG_GREEN << "---- Test 3: Too Low Grade ----" << RESET << std::endl;
+	std::cout << BG_GREEN << "---- Test 3: Grade Too Low ----" << RESET << std::endl;
 	try 
 	{
 		Bureaucrat b3("TooLow", 151);
@@ -78,18 +78,19 @@ int main()
 	std::cout << BG_GREEN << "---- Test 6: Copy & Assign Constructors ----" << RESET << std::endl;
 	try
 	{
-		std::cout << BLUE << "Default name constructor:" << RESET << std::endl;
+		std::cout << BLUE << "- Default name constructor -" << RESET << std::endl;
 		Bureaucrat original("original", 20);
 		std::cout << std::endl;
 
-		std::cout << BLUE << "Copy name constructor:" << RESET << std::endl;
+		std::cout << BLUE << "- Copy name constructor -" << RESET << std::endl;
 		Bureaucrat copy(original);
 		std::cout << std::endl;
 
-		std::cout << BLUE << "Assign constructor:" << RESET << std::endl;
+		std::cout << BLUE << "- Assign constructor -" << RESET << std::endl;
 		Bureaucrat test("test", 2);
 		std::cout << test << std::endl;
 		test = original;
+		std::cout << test << std::endl;
 		std::cout << std::endl;
 	}
 	catch (std::exception& e)
