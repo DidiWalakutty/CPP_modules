@@ -11,7 +11,6 @@
 // function pointer type, so the code is easier to read/write.
 // This isn't the same as "using namespace", which makes all names in a namespace
 // available without the namespace prefix (like std::string).
-
 class Intern
 {
 	private:
