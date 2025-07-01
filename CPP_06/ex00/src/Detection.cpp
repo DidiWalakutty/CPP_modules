@@ -76,8 +76,6 @@ static bool check_double(const std::string& str)
 	{
 		return false;
 	}
-	
-
 }
 
 c_type detectType(const std::string& input)
