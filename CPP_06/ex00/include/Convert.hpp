@@ -26,3 +26,8 @@ class ScalarConverter
 };
 
 c_type detectType(const std::string& input);
+
+void convertChar(const std::string& str);
+void convertInt(const std::string& str);
+void convertFloat(const std::string& str);
+void convertDouble(const std::string& str);
