@@ -3,6 +3,8 @@
 #include <iostream>
 #include <limits>
 #include <stdexcept>
+#include <cmath>
+#include <iomanip>
 
 typedef enum type
 {
@@ -27,7 +29,9 @@ class ScalarConverter
 
 c_type detectType(const std::string& input);
 
-void convertChar(const std::string& str);
-void convertInt(const std::string& str);
-void convertFloat(const std::string& str);
-void convertDouble(const std::string& str);
+void convertChar(char c);
+void convertInt(int i);
+void convertFloat(const std::string& input);
+void convertDouble(const std::string& input);
+
+void printChar(char c);
