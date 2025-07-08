@@ -33,19 +33,52 @@ void convertInt(int i)
 
 void convertFloat(const std::string& input)
 {
-	float f = std::stof(input);
-	// if nan or infinite number, int and char are always impossible
-	if (input == "nanf" || input == "+inff" || input == "-inff" || std::isnan(f) || std::isinf(f))
+	float f;
+	try
+	{
+		f = std::stof(input);
+	}
+	catch (const std::out_of_range&)
+	{
+		if (!input.empty() && input[0] == '-')
+			f = -std::numeric_limits<float>::infinity();
+		else
+			f = std::numeric_limits<float>::infinity();
+	}
+	catch (const std::invalid_argument&)
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: " << input << std::endl;	// Print float with OG string to keep 'f' suffix intact
-
-		std::string doubleStr = input;
-		if (!doubleStr.empty() && doubleStr.back() == 'f')
-			doubleStr.pop_back();						// Strip trailing 'f'.
-		std::cout << "double: " << doubleStr << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
 		return ;
+	}
+	
+	// if nan or infinite number, int and char are always impossible
+	if (input == "nanf" || std::isnan(f))
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		return ;
+	}
+	if (input == "+inff" || input == "-inff" || std::isinf(f)) 
+	{
+    	std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+
+		if (f < 0) 
+		{
+			std::cout << "float: -inff" << std::endl;
+			std::cout << "double: -inf" << std::endl;
+		} 
+		else 
+		{
+			std::cout << "float: +inff" << std::endl;
+			std::cout << "double: +inf" << std::endl;
+		}
+    	return;
 	}
 	
 	// Check if char fits range and is printable
@@ -84,18 +117,57 @@ void convertFloat(const std::string& input)
 
 void convertDouble(const std::string& input)
 {
-	double d = std::stod(input);
-	// if nan or infinite number, int and char are always impossible
-	if (input == "nan" || input == "+inf" || input == "-inf" || std::isnan(d) || std::isinf(d))
+	double d;
+	try
+	{
+		d = std::stod(input);
+	}
+	catch (const std::out_of_range& e)
+	{
+		// Check if it's too big and should be treated as +inf or -inf
+		if (!input.empty() && input[0] == '-')
+			d = -std::numeric_limits<double>::infinity();
+		else
+			d = std::numeric_limits<double>::infinity();
+	}
+	catch (const std::exception& e)
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
-		std::cout << "double: " << input << std::endl;
-		return ;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+		return;
 	}
 
-	// Check if char fits in range + is printable
+	// Handle NaN
+	if (input == "nan" || std::isnan(d))
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		return;
+	}
+
+	// Handle +inf / -inf from input OR overflow
+	if (input == "+inf" || input == "-inf" || std::isinf(d))
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		if (d < 0)
+		{
+			std::cout << "float: -inff\n";
+			std::cout << "double: -inf" << std::endl;
+		}
+		else
+		{
+			std::cout << "float: +inff\n";
+			std::cout << "double: +inf" << std::endl;
+		}
+		return;
+	}
+
+	// Convert to char
 	if (d < static_cast<double>(std::numeric_limits<char>::min()) || d > static_cast<double>(std::numeric_limits<char>::max()))
 		std::cout << "char: impossible" << std::endl;
 	else
@@ -107,19 +179,15 @@ void convertDouble(const std::string& input)
 			std::cout << "char: Non Displayable" << std::endl;
 	}
 
-	// Check if f fits in int range
+	// Convert to int
 	if (d < static_cast<double>(std::numeric_limits<int>::min()) || d > static_cast<double>(std::numeric_limits<int>::max()))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(d) << std::endl;
 
-	// Float doesn't always fit.
-	// Check for lowest(), because it checks if the double value is too negative to fit in a float. Is a lower bound check.
-	// min() would check the smallest number greater than zero that a float can represent.
+	// Convert to float
 	if (d < static_cast<double>(std::numeric_limits<float>::lowest()) || d > static_cast<double>(std::numeric_limits<float>::max()))
-	{
 		std::cout << "float: impossible" << std::endl;
-	}
 	else
 	{
 		float f = static_cast<float>(d);
@@ -129,12 +197,13 @@ void convertDouble(const std::string& input)
 			std::cout << "float: " << f << "f" << std::endl;
 	}
 
-	// Doubel
+	// Double output
 	if (d == static_cast<int>(d))
 		std::cout << "double: " << d << ".0" << std::endl;
 	else
 		std::cout << "double: " << d << std::endl;
 }
+
 
 void ScalarConverter::convert(const std::string& input)
 {

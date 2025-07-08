@@ -59,7 +59,12 @@ static bool check_float(const std::string& str)
 		std::stof(validity);
 		return true;
 	}
-	catch (const std::exception& e)
+	catch (const std::out_of_range& e)
+	{
+		// Treats overflow as valid float (inff)
+		return true;
+	}
+	catch (const std::invalid_argument& e)
 	{
 		return false;
 	}
@@ -72,7 +77,12 @@ static bool check_double(const std::string& str)
 		std::stod(str);
 		return true;
 	}
-	catch (const std::exception& e)
+	catch (const std::out_of_range& e)
+	{
+		// Treats overflow as valid double (inf)
+		return true;
+	}
+	catch (const std::invalid_argument& e)
 	{
 		return false;
 	}
