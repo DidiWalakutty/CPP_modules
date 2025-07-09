@@ -1,5 +1,6 @@
 #include "../include/Serialization.hpp"
 #include "../include/Data.hpp"
+#include <iostream>
 
 /*
 	This project converts a pointer to a numeric form (uintptr_t) and back.
