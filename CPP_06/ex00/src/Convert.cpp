@@ -10,7 +10,7 @@ void convertChar(char c)
 	
 	std::cout << "int: " << static_cast<int>(c) << std::endl;
 	std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
-	std::cout << "double" << static_cast<double>(c) << ".0" << std::endl; 
+	std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl; 
 }
 
 void convertInt(int i)

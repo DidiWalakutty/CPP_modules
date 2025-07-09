@@ -25,6 +25,10 @@ $(OBJDIR)/%.o: src/%.cpp
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CPP_FLAGS) -c -o $@ $<
 
+test: $(NAME)
+	@echo "${BLUE}Running tests...${DONE}"
+	@./test.sh
+	
 # Cleaning
 clean:
 	$(RM) $(OBJDIR)
