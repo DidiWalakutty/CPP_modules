@@ -10,8 +10,9 @@ static bool check_char(const std::string& str)
 /*
 	Check if the string is a valid integer literal:
 	- Optional leading '+' or '-' sign, digits only.
-	- check if it fits int range after conversion with std::stoll.
+	- convert string to long long and see if it fits int range.
 	- std::stoll will throw exception if > long long or not a valid format type. 
+	- will throw invalid_arg if it's not even a number ot too > || < for a long long.
 */
 static bool check_int(const std::string& str)
 {
@@ -46,6 +47,13 @@ static bool check_int(const std::string& str)
 	return true;
 }
 
+/*
+	Check if the string is a valid float literal:
+	- Must end with 'f' (e.g. 3.14f)
+	- Remove 'f' and try std::stof to check if it's a valid float.
+	- std::stof throws invalid_arg if not a number.
+	- out_of_range (like 1e40) is still a valid float (inff).
+*/
 static bool check_float(const std::string& str)
 {
 	if (str.size() == 1)
@@ -70,6 +78,12 @@ static bool check_float(const std::string& str)
 	}
 }
 
+/*
+	Check if the string is a valid double literal:
+	- Try std::stod to convert to double.
+	- Throws invalid_arg if not a number.
+	- out_of_range (like 1e309) is still valid (becomes inf).
+*/
 static bool check_double(const std::string& str)
 {
 	try

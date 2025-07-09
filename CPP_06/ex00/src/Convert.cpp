@@ -1,9 +1,13 @@
 #include "../include/Convert.hpp"
 
+/*
+	Cast to unsigned to avoid undefined behavior, ensures valid range of [0, 255].
+	Add trailing .0(f), because it'll be a round number.	
+*/
 
 void convertChar(char c)
 {
-	if (std::isprint(static_cast<unsigned char>(c)))	// cast to unsigned to avoid undefined behavior, ensures valid range of [0, 255]
+	if (std::isprint(static_cast<unsigned char>(c)))
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: Non Displayable" << std::endl;
@@ -13,9 +17,14 @@ void convertChar(char c)
 	std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl; 
 }
 
+/*
+	Convert integer to all scalar types:
+	- Check if int fits in char range.
+	- Checked if it's an int in check_int, so just print it.
+	- Float and double always fit, print with ".0" suffix.
+*/
 void convertInt(int i)
 {
-	// char: check if it's printable, and in char-range?
 	if (i < std::numeric_limits<char>::min() || i > std::numeric_limits<char>::max())
 		std::cout << "char: impossible" << std::endl;
 	else if (!std::isprint(static_cast<unsigned char>(i)))
@@ -23,14 +32,18 @@ void convertInt(int i)
 	else
 		std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
 
-	// we can print the i, because we checked if < int MIn or > int Max before.
 	std::cout << "int: " << i << std::endl;
-	// float: will always fit
-	// double: will always fit
 	std::cout << "float: " << static_cast<float>(i) << ".0f" << std::endl;
 	std::cout << "double: " << static_cast<double>(i) << ".0" << std::endl;
 }
 
+/*
+  - Use std::stof, catch out_of_range (set +/-inf) and invalid_argument (string has no valid number).
+  - Handle special float literals "nanf", "+inff", "-inff" explicitly.
+  - For normal float values:
+    * Print float with "f" suffix, adding ".0" if whole number.
+    * Print corresponding double value, adding ".0" if whole number.
+*/
 void convertFloat(const std::string& input)
 {
 	float f;
@@ -54,7 +67,6 @@ void convertFloat(const std::string& input)
 		return ;
 	}
 	
-	// if nan or infinite number, int and char are always impossible
 	if (input == "nanf" || std::isnan(f))
 	{
 		std::cout << "char: impossible" << std::endl;
@@ -107,7 +119,7 @@ void convertFloat(const std::string& input)
 	else
 		std::cout << "float: " << f << "f" << std::endl;
 
-	// Double output formatting with trailing '.0' if whole number
+	// Double with trailing '.0' if whole number
 	double d = static_cast<double>(f);
 	if (d == static_cast<int>(d))
 		std::cout << "double: " << d << ".0" << std::endl;
@@ -115,6 +127,15 @@ void convertFloat(const std::string& input)
 		std::cout << "double: " << d << std::endl;
 }
 
+/*
+  - Use std::stod, catch out_of_range (set +/-inf) and invalid_argument (string has no valid number).
+  - Handle special double literals: "nan", "+inf", "-inf" explicitly.
+  - For normal double values:
+    * Check if double fits within float range:
+       - If not, print "float: impossible".
+       - Else print float with "f" suffix, adding ".0" if whole number.
+    * Print double with trailing ".0" if whole number.
+*/
 void convertDouble(const std::string& input)
 {
 	double d;
@@ -124,7 +145,6 @@ void convertDouble(const std::string& input)
 	}
 	catch (const std::out_of_range& e)
 	{
-		// Check if it's too big and should be treated as +inf or -inf
 		if (!input.empty() && input[0] == '-')
 			d = -std::numeric_limits<double>::infinity();
 		else
@@ -139,7 +159,6 @@ void convertDouble(const std::string& input)
 		return;
 	}
 
-	// Handle NaN
 	if (input == "nan" || std::isnan(d))
 	{
 		std::cout << "char: impossible" << std::endl;
@@ -149,7 +168,7 @@ void convertDouble(const std::string& input)
 		return;
 	}
 
-	// Handle +inf / -inf from input OR overflow
+	// Handle +inf / -inf from input or overflow
 	if (input == "+inf" || input == "-inf" || std::isinf(d))
 	{
 		std::cout << "char: impossible" << std::endl;
@@ -167,7 +186,6 @@ void convertDouble(const std::string& input)
 		return;
 	}
 
-	// Convert to char
 	if (d < static_cast<double>(std::numeric_limits<char>::min()) || d > static_cast<double>(std::numeric_limits<char>::max()))
 		std::cout << "char: impossible" << std::endl;
 	else
@@ -179,13 +197,11 @@ void convertDouble(const std::string& input)
 			std::cout << "char: Non Displayable" << std::endl;
 	}
 
-	// Convert to int
 	if (d < static_cast<double>(std::numeric_limits<int>::min()) || d > static_cast<double>(std::numeric_limits<int>::max()))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(d) << std::endl;
 
-	// Convert to float
 	if (d < static_cast<double>(std::numeric_limits<float>::lowest()) || d > static_cast<double>(std::numeric_limits<float>::max()))
 		std::cout << "float: impossible" << std::endl;
 	else
@@ -197,7 +213,6 @@ void convertDouble(const std::string& input)
 			std::cout << "float: " << f << "f" << std::endl;
 	}
 
-	// Double output
 	if (d == static_cast<int>(d))
 		std::cout << "double: " << d << ".0" << std::endl;
 	else
@@ -207,7 +222,6 @@ void convertDouble(const std::string& input)
 
 void ScalarConverter::convert(const std::string& input)
 {
-	// 1. Detect Type
 	c_type type = detectType(input);
 
 	switch (type)
@@ -228,7 +242,4 @@ void ScalarConverter::convert(const std::string& input)
 			std::cout << "Error: invalid literal" << std::endl;
 			break;
 	}
-	// 2. Convert to detected type
-	// 3. static_cast to other types
-	// 4. print results.
 }

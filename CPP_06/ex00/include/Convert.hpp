@@ -21,7 +21,7 @@ class ScalarConverter
 		ScalarConverter() = delete;
 		ScalarConverter(const ScalarConverter& copy) = delete;
 		ScalarConverter& operator=(const ScalarConverter& assign) = delete;
-		~ScalarConverter();
+		~ScalarConverter() = delete;
 
 	public:
 		static void convert(const std::string& input);
