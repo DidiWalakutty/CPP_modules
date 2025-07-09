@@ -1,4 +1,7 @@
 #include "../include/Base.hpp"
 
-Base::~Base() {}
+Base::~Base()
+{
+	std::cout << "Base Destructor was called" << std::endl;
+}
 
