@@ -16,15 +16,3 @@ class Serializer
 		static uintptr_t serialize(Data* ptr);
 		static Data* deserialize(uintptr_t raw);
 };
-
-/* 
-	static makes calling simpler and clearer:
-
-	uintptr_t raw = Serializer::serialize(ptr);
-	Data* p = Serializer::deserialize(raw); 
-	
-	instead of:
-
-	Serializer s;
-	uintptr_t raw = s.serialize(ptr);
-*/

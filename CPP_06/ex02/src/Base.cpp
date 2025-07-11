@@ -1,5 +1,4 @@
 #include "../include/Base.hpp"
-#include <chrono>
 
 Base::~Base()
 {

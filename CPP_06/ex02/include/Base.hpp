@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include <exception>	// std::bad_cast
-#include <cstdlib>		// rand()
-#include <ctime>		// time()
+#include <exception>
+#include <cstdlib>
+#include <chrono>
 
 class Base
 {
@@ -11,7 +11,7 @@ class Base
 		virtual ~Base();
 };
 
-// Create empty classes that publicly inherit from Base
+// Creating empty classes that publicly inherit from Base
 class A : public Base {};
 class B : public Base {};
 class C : public Base {};
