@@ -131,7 +131,7 @@ void convertFloat(const std::string& input)
   - Use std::stod, catch out_of_range (set +/-inf) and invalid_argument (string has no valid number).
   - Handle special double literals: "nan", "+inf", "-inf" explicitly.
   - For normal double values:
-    * Check if double fits within float range:
+    * Check if input fits within float range:
        - If not, print "float: impossible".
        - Else print float with "f" suffix, adding ".0" if whole number.
     * Print double with trailing ".0" if whole number.

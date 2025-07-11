@@ -12,7 +12,7 @@ static bool check_char(const std::string& str)
 	- Optional leading '+' or '-' sign, digits only.
 	- convert string to long long and see if it fits int range.
 	- std::stoll will throw exception if > long long or not a valid format type. 
-	- will throw invalid_arg if it's not even a number ot too > || < for a long long.
+	- will throw invalid_arg if it's not even a number or too > || < for a long long.
 */
 static bool check_int(const std::string& str)
 {
