@@ -8,7 +8,7 @@ HEADERS		= -I ./include
 
 # Source Files
 SRC			=	src/main.cpp \
-					src/base.cpp
+					src/Base.cpp
 					
 
 OBJDIR		= obj
