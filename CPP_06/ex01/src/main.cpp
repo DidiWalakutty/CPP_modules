@@ -3,15 +3,15 @@
 #include <iostream>
 
 /*
-	This project converts a pointer to a numeric form (uintptr_t) and back.
+	This project converts a pointer (memory address) to a numeric form (uintptr_t) and back.
 	Useful when raw pointer addresses need to be stored or transferred as numbers.
 */
 int main()
 {
 	Data data;
-	data.number = 8;
+	data._number = 8;
 	std::cout << std::endl;
-	std::cout << "Data pointer created with number: " << data.number << std::endl;
+	std::cout << "Data pointer created with number: " << data._number << std::endl;
 	
 	// Convert pointer to int
 	uintptr_t raw = Serializer::serialize(&data);
@@ -25,7 +25,7 @@ int main()
 
 	// Number check
 	std::cout << std::endl;
-	std::cout << "Number check for deserialized pointer: " << ptr->number << std::endl;
+	std::cout << "Number check for deserialized pointer: " << ptr->_number << std::endl;
 
 	return (0);
 }

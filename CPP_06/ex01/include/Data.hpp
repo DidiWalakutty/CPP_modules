@@ -3,5 +3,6 @@
 class Data
 {
 	public:
-		int number;
+		int _number;
+		char _c;
 };
