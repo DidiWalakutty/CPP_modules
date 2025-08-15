@@ -15,7 +15,7 @@ int main()
 	
 	// Convert pointer to int
 	uintptr_t raw = Serializer::serialize(&data);
-	// Convert int back to Data*
+	// Convert int back to different Data pointer
 	Data* ptr = Serializer::deserialize(raw);
 
 	std::cout << std::endl;

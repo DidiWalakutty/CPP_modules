@@ -33,5 +33,3 @@ void convertChar(char c);
 void convertInt(int i);
 void convertFloat(const std::string& input);
 void convertDouble(const std::string& input);
-
-void printChar(char c);

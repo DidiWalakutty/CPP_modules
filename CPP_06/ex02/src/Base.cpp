@@ -7,12 +7,10 @@ Base::~Base()
 
 /*
 	Randomly creates and returns a new instance of A, B, or C as a Base pointer.
-	Uses srand() to pick which derived class to instantiate.
-	Uses nanoseconds since program start to avoid repeating patterns that count per second.
+	Uses rand() to pick which derived class to instantiate.
 */
 Base* generate()
 {
-	std::srand(std::chrono::steady_clock::now().time_since_epoch().count());
 	int r = std::rand() % 3;
 
 	if (r == 0)

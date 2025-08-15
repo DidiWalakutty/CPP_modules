@@ -4,7 +4,6 @@
 	Cast to unsigned to avoid undefined behavior, ensures valid range of [0, 255].
 	Add trailing .0(f), because it'll be a round number.	
 */
-
 void convertChar(char c)
 {
 	if (std::isprint(static_cast<unsigned char>(c)))
@@ -113,7 +112,7 @@ void convertFloat(const std::string& input)
 		std::cout << "int: " << static_cast<int>(f) << std::endl;
 	}
 
-	// Check if we need .0f for fractional part, or just f
+	// Check if whole number
 	if (f == static_cast<int>(f))
 		std::cout << "float: " << f << ".0f" << std::endl;
 	else
@@ -132,8 +131,6 @@ void convertFloat(const std::string& input)
   - Handle special double literals: "nan", "+inf", "-inf" explicitly.
   - For normal double values:
     * Check if input fits within float range:
-       - If not, print "float: impossible".
-       - Else print float with "f" suffix, adding ".0" if whole number.
     * Print double with trailing ".0" if whole number.
 */
 void convertDouble(const std::string& input)
@@ -168,7 +165,6 @@ void convertDouble(const std::string& input)
 		return;
 	}
 
-	// Handle +inf / -inf from input or overflow
 	if (input == "+inf" || input == "-inf" || std::isinf(d))
 	{
 		std::cout << "char: impossible" << std::endl;
@@ -186,6 +182,7 @@ void convertDouble(const std::string& input)
 		return;
 	}
 
+	// Else, do regular conversions
 	if (d < static_cast<double>(std::numeric_limits<char>::min()) || d > static_cast<double>(std::numeric_limits<char>::max()))
 		std::cout << "char: impossible" << std::endl;
 	else
@@ -202,6 +199,7 @@ void convertDouble(const std::string& input)
 	else
 		std::cout << "int: " << static_cast<int>(d) << std::endl;
 
+	// use lowest(): checks min negative float value. min() does lowest positive value
 	if (d < static_cast<double>(std::numeric_limits<float>::lowest()) || d > static_cast<double>(std::numeric_limits<float>::max()))
 		std::cout << "float: impossible" << std::endl;
 	else
