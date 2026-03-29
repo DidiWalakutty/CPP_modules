@@ -19,6 +19,7 @@ Cat::Cat (const Cat& copy) : Animal(copy)
 	std::cout << CYAN << "[Cat] Copy constructor was called." << RESET << std::endl;
 	this->brain = new Brain(*copy.brain);
 }
+
 Cat& Cat::operator=(const Cat& assign)
 {
 	std::cout << CYAN << "[Cat] Assign constructor was called." << RESET << std::endl;
