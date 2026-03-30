@@ -4,7 +4,8 @@
 
 This repository captures my journey through the C++ modules at Codam (42 Network), where I learned C++ by building everything from scratch.
 
-Each module focuses on a core concept and builds on the previous one — from understanding how objects work, to designing more complex systems using polymorphism, templates, and low-level casting.
+Each module focuses on a core concept and builds on the previous one. 
+From understanding how objects work, to designing more complex systems using polymorphism, templates, and low-level casting.
 
 I approached these projects with a strong focus on **understanding what’s happening under the hood**, not just making things work.
 
@@ -78,9 +79,9 @@ I approached these projects with a strong focus on **understanding what’s happ
 ## 🎯 Key Takeaways
 
 - I learned to think in terms of **systems, not just functions**  
-- I became comfortable managing **memory explicitly and safely**  
-- I developed a habit of **breaking down complex problems into clear steps**  
-- I focused on writing code that is not only correct, but also **readable and maintainable**  
+- Became comfortable managing **memory explicitly and safely**  
+- Developed a habit of **breaking down complex problems into clear steps**  
+- Focused on writing code that is also **readable and maintainable**  
 
 ---
 
@@ -90,7 +91,7 @@ These modules form my foundation in C++, moving from fundamentals to more advanc
 
 What I've Learned:
 - Building structured and reliable systems
-- Clean architecture
+- Writing clean architecture
 - Scalibility
 - Memory Safety
 
