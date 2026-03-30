@@ -84,7 +84,7 @@ class Array
 		// Custom classes don't support [] by default, so we overload operator[]
 		// to define how elements are accessed using arr[index].
 		// This works automatically for built-in arrays and pointers, but not for custom classes.
-
+		// ---
 		// Non-const version: allows modification of elements
 		T& operator[](unsigned int index)				
 		{
