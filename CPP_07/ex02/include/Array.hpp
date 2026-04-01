@@ -34,7 +34,7 @@ class Array
 		// Constructor with parameter
 		Array(unsigned int n)
 		{
-			std::cout << YELLOW << "Constructor with unsign. int parameter was called" << RESET << std::endl;
+			std::cout << YELLOW << "Constructor with unsigned int parameter was called" << RESET << std::endl;
 			_data = new T[n];
 			_arraySize = n;
 		}
