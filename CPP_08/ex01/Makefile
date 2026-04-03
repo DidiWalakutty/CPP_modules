@@ -1,4 +1,4 @@
-NAME		= 	span
+NAME		= 	ex01
 
 # Configuration
 CC			= c++
@@ -7,7 +7,8 @@ RM			= rm -rf
 HEADERS		= -I ./include
 
 # Source Files
-SRC			=	src/main.cpp
+SRC			=	src/main.cpp \
+				src/Span.cpp
 					
 
 OBJDIR		= obj

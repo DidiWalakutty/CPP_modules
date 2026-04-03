@@ -1,4 +1,4 @@
-NAME		= 	easyfind
+NAME		= 	ex00
 
 # Configuration
 CC			= c++
