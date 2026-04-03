@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/30 21:30:28 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/03/30 22:26:33 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/03 16:47:38 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,29 @@ Span::~Span()
 	// std::cout << RED << "Destructor was called" << RESET << std::endl;
 }
 
+// Add a single number to the container
 void Span::addNumber(int num)
 {
 	if (_elementNum.size() >= _maxSize)
 		throw std::out_of_range("Can't add more numbers, container has reached capacity.");
 
 	_elementNum.push_back(num);
+}
+
+/**
+ *  Adds a range of numbers to Span using iterators.
+ *  vectorSize calculates how many elements are between the begin and end iterators.
+ *  Checks size of what's currently in the container + size of the new vector.
+ *  If the total > _maxSize, throws an exception.
+ *  If not, append them to the end of the container.
+ */
+void Span::addMultipleNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	int vectorSize = std::distance(begin, end);
+	if (_elementNum.size() + vectorSize > _maxSize)
+		throw std::out_of_range("Couldn't add multiple numbers, container would reach or go over capacity.");
+	
+	_elementNum.insert(_elementNum.end(), begin, end);
 }
 
 unsigned int Span::longestSpan() const
@@ -67,7 +84,7 @@ unsigned int Span::shortestSpan() const
 
 	for (size_t i = 2; i < copy.size(); i++)
 	{
-		int span = copy[i] - copy[i - 1];
+		unsigned int span = copy[i] - copy[i - 1];
 		if (span < min_span)
 			min_span = span;
 	}
