@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/01 15:03:17 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/03 16:48:06 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/10 17:43:26 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int main()
 	for (int i = 0; i < 10000; i++)
 		largeVector.push_back(i);
 	
-	Span bigSpan = Span(1000);
+	Span bigSpan = Span(10000);
 	try {
 		bigSpan.addMultipleNumbers(largeVector.begin(), largeVector.end());
 		std::cout << "Shortest span: " << bigSpan.shortestSpan() << std::endl;
