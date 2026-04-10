@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/09 16:35:55 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/09 21:08:31 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/10 17:36:33 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int main()
 {
+	// --- Test 1 ---
 	std::cout << MAGENTA << "1) --- Subject test: MutantStack ---" << RESET << std::endl;
 	MutantStack<int> mstack;
 	
@@ -27,6 +28,7 @@ int main()
 	
 	mstack.pop();
 	std::cout << "Size after pop: " << mstack.size() << "\n" << std::endl;
+	std::cout << "Top element after pop: " << mstack.top() << std::endl;
 	
 	mstack.push(3);
 	mstack.push(5);
@@ -53,8 +55,11 @@ int main()
 	
 	// Copying MutantStack to std::stack to demonstrate compatibility
 	std::stack<int> s(mstack);
-	(void)s; // Avoid unused variable warning
+	// Avoid unused variable warning
+	(void)s;
 
+
+	// --- Test 2 ---
 	std::cout << MAGENTA << "\n2) --- Same operations with std::list ---" << RESET << std::endl;
 	std::list<int> lst;
 
@@ -82,34 +87,53 @@ int main()
 	--lit;
 	std::cout << "After --lit: " << *lit << std::endl;
 
-	std::cout << "Full iteration through std::list:" << std::endl;
+	std::cout << "\nFull iteration through std::list:" << std::endl;
 	while (lit != lite)
 	{
 		std::cout << *lit << std::endl;
 		++lit;
 	}
 	
-	std::cout << MAGENTA << "\n3) --- Copy tests ---" << RESET << std::endl;
-	MutantStack<int> original;
-	original.push(1);
-	original.push(2);
-	original.push(3);
+	// --- Test 3 ---
+	std::cout << MAGENTA << "\n3) --- Const iterator test ---" << RESET << std::endl;
+	MutantStack<int> temp;
 
-	MutantStack<int> copy(original);
-	MutantStack<int> assigned;
-	assigned = original;
+	temp.push(10);
+	temp.push(20);
 
-	std::cout << "Original:" << std::endl;
-	for (MutantStack<int>::iterator i = original.begin(); i != original.end(); ++i)
-		std::cout << *i << std::endl;
+	const MutantStack<int> constStack(temp);
+	MutantStack<int>::const_iterator cit = constStack.begin();
+	MutantStack<int>::const_iterator cite = constStack.end();
 
-	std::cout << "Copy:" << std::endl;
-	for (MutantStack<int>::iterator i = copy.begin(); i != copy.end(); ++i)
-		std::cout << *i << std::endl;
+	std::cout << "Elements in const MutantStack:" << std::endl;
+	while (cit != cite)
+	{
+		std::cout << *cit << std::endl;
+		++cit;
+	}
+	
+	// --- Test 4 ---
+	// std::cout << MAGENTA << "\n4) --- Copy tests ---" << RESET << std::endl;
+	// MutantStack<int> original;
+	// original.push(1);
+	// original.push(2);
+	// original.push(3);
 
-	std::cout << "Assigned:" << std::endl;
-	for (MutantStack<int>::iterator i = assigned.begin(); i != assigned.end(); ++i)
-		std::cout << *i << std::endl;
+	// MutantStack<int> copy(original);
+	// MutantStack<int> assigned;
+	// assigned = original;
+
+	// std::cout << "Original:" << std::endl;
+	// for (MutantStack<int>::iterator i = original.begin(); i != original.end(); ++i)
+	// 	std::cout << *i << std::endl;
+
+	// std::cout << "Copy:" << std::endl;
+	// for (MutantStack<int>::iterator i = copy.begin(); i != copy.end(); ++i)
+	// 	std::cout << *i << std::endl;
+
+	// std::cout << "Assigned:" << std::endl;
+	// for (MutantStack<int>::iterator i = assigned.begin(); i != assigned.end(); ++i)
+	// 	std::cout << *i << std::endl;
 	
 	return 0;
 }
