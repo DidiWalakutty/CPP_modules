@@ -76,6 +76,16 @@ I approached these projects with a strong focus on **understanding what’s happ
 
 ---
 
+### 🔹 CPP08 — STL & Iterators
+- working with STL containers (`vector`, `list`, `deque`)  
+- iterators (`begin`, `end`) and traversal patterns  
+- STL algorithms (`std::find`, `std::sort`, etc.)  
+- range operations using iterators  
+- container adapters (`std::stack`) and how they wrap underlying containers  
+- extending standard containers (making a stack iterable)  
+
+---
+
 ## 🎯 Key Takeaways
 
 - I learned to think in terms of **systems, not just functions**  
@@ -95,4 +105,4 @@ What I've Learned:
 - Scalibility
 - Memory Safety
 
-More modules (CPP08, CPP09) will be added as I continue.
+The final module (CPP09) will be added as I continue.
