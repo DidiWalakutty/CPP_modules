@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <stdexcept>
 
+#define RESET   "\033[0m"
+#define MAGENTA "\033[35m"
+
 template <typename T>
 void easyfind(const T& container, int value)
 {
