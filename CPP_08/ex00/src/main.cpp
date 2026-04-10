@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/01 15:03:13 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/01 15:03:14 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/10 17:45:56 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main()
 	deq.push_back(100);
 	deq.push_back(7);
 
-	std::cout << "Testing vector:" << std::endl;
+	std::cout << MAGENTA << "Testing vector:" << RESET << std::endl;
 	try
 	{
 		std::cout << "test 1" << std::endl;
@@ -63,7 +63,7 @@ int main()
 		std::cout << "Vector: " << e.what() << std::endl;
 	}
 
-	std::cout << "\nTesting list:" << std::endl;
+	std::cout << MAGENTA << "\nTesting list:" << RESET << std::endl;
 	try
 	{
 		std::cout << "test 1" << std::endl;
@@ -86,7 +86,7 @@ int main()
 		std::cout << "List: " << e.what() << std::endl;
 	}
 
-	std::cout << "\nTesting deque:" << std::endl;
+	std::cout << MAGENTA << "\nTesting deque:" << RESET << std::endl;
 	try
 	{
 		std::cout << "test 1" << std::endl;
