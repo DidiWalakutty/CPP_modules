@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/30 21:30:28 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/10 17:49:45 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/11 15:34:14 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void Span::addNumber(int num)
 void Span::addMultipleNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
 	int vectorSize = std::distance(begin, end);
-	std::cout << "Distance between iterators: " << vectorSize << std::endl;
-	std::cout << "Current container size: " << _elementNum.size() << std::endl;
-	int totalSize = _elementNum.size() + vectorSize;
-	std::cout << "Total size after adding: " << totalSize << std::endl;
+
 	if (_elementNum.size() + vectorSize > _maxSize)
 		throw std::out_of_range("Couldn't add multiple numbers, container would reach or go over capacity.");
 	
