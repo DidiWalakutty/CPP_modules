@@ -6,11 +6,16 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/10 18:08:02 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 17:17:21 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/14 17:42:31 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/BitcoinExchange.hpp"
+
+BitcoinExchange::BitcoinExchange() 
+{
+	// std::cout << MAGENTA << "BitcoinExchange object created." << RESET << std::endl;
+}
 
 BitcoinExchange::BitcoinExchange(const std::string &dataFile)
 {

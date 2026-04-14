@@ -23,7 +23,7 @@ class BitcoinExchange
 		int getDaysInMonth(int month, int year) const;
 
 	public:
-		BitcoinExchange() = delete; // do we want to delete
+		BitcoinExchange();
 		BitcoinExchange(const std::string &dataFile);
 		BitcoinExchange(const BitcoinExchange &copy);
 		BitcoinExchange &operator=(const BitcoinExchange &assign);
