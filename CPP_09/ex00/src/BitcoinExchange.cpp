@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/10 18:08:02 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 17:42:31 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/14 20:25:17 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void BitcoinExchange::loadCSV(const std::string& dataFile)
 /**
  * @brief Retrieves the exchange rate for a given date.
  *
+ * lower_bound() gives the first value that's greater than or equal to the date.
  * Uses the exact date if available, otherwise uses the closest earlier date's rate.
  * Throws if no earlier date exists.
  */
@@ -111,7 +112,7 @@ double BitcoinExchange::getExchangeRateForDate(const std::string& date) const
 	// case 1) exact match found
 	if (it != _exchangeRates.end() && it->first == date)
 		return it->second;
-	// case 2) no exact match, but there are earlier dates available
+	// case 2) lower_bound returned end() → date is after all entries
 	if (it == _exchangeRates.end())
 	{
 		--it;
