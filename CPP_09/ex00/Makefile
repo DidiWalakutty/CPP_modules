@@ -7,8 +7,9 @@ RM			= rm -rf
 HEADERS		= -I ./include
 
 # Source Files
-SRC			=	src/main.cpp /
-				src/BitcoinExchange.cpp
+SRC			=	src/main.cpp \
+				src/BitcoinExchange.cpp \
+				src/Utils.cpp
 					
 OBJDIR		= obj
 OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))
