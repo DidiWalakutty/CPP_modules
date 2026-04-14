@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/10 18:08:02 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 01:27:51 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/14 16:38:36 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,36 @@ void BitcoinExchange::loadCSV(const std::string& dataFile)
 		throw std::runtime_error("No valid exchange rates found in data file: " + dataFile);
 }
 
+/**
+ * @brief Retrieves the exchange rate for a given date.
+ *
+ * Uses the exact date if available, otherwise uses the closest earlier date's rate.
+ * Throws if no earlier date exists.
+ */
+double BitcoinExchange::getExchangeRateForDate(const std::string& date) const
+{
+	std::map<std::string, double>::const_iterator it = _exchangeRates.lower_bound(date);
+	
+	// case 1) exact match found
+	if (it != _exchangeRates.end() && it->first == date)
+		return it->second;
+	// case 2) no exact match, but there are earlier dates available
+	if (it == _exchangeRates.end())
+	{
+		--it;
+		return it->second;
+	}
+	// case 3) no exact match and no earlier dates available
+	if (it == _exchangeRates.begin())
+	{
+		throw std::runtime_error("No exchange rate available for date: " + date);
+	}
+
+	// case 4) no exact match, but there are earlier dates available
+	--it;
+	return it->second;
+}
+
 void BitcoinExchange::processInputFile(const std::string &inputFile)
 {
 	if (inputFile.empty())
@@ -122,7 +152,7 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		size_t pipePos = line.find('|');
 		if (pipePos == std::string::npos)
 		{
-			std::cout << RED << "Invalid input format: missing pipe separator in line: " << line << RESET << std::endl;
+			std::cout << RED << "Error: Bad input -> " << line << RESET << std::endl;
 			continue;
 		}
 
@@ -131,14 +161,14 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		std::string valueStr = trim(line.substr(pipePos + 1));
 		if (date.empty() || valueStr.empty())
 		{
-			std::cout << RED << "Invalid input format: empty date or value in line: " << line << RESET << std::endl;
+			std::cout << RED << "Error: Bad input -> " << line << RESET << std::endl;
 			continue;
 		}
 
 		// 4. Validate date
 		if (!isValidDate(date))
 		{
-			std::cout << RED << "Invalid date format in input: " << date << RESET << std::endl;
+			std::cout << RED << "Error: Invalid date format in input -> " << date << RESET << std::endl;
 			continue;
 		}
 
@@ -152,20 +182,31 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 			std::cout << RED << "Invalid value in input: " << valueStr << RESET << std::endl;
 		}
 		if (value < 0)
-			std::cout << RED << "Value cannot be negative in input: " << valueStr << RESET << std::endl;
+		{
+			std::cout << RED << "Error: Not a positive number -> " << valueStr << RESET << std::endl;
+			continue;
+		}
 		if (value > 1000)
-			std::cout << RED << "Value cannot be greater than 1000 in input: " << valueStr << RESET << std::endl;
+		{
+			std::cout << RED << "Error: Too large a number -> " << valueStr << RESET << std::endl;
+			continue;
+		}
 			
 		// 6. Look up exchange rate for the date (or closest previous date)
-		double rate = getExchangeRateForDate(date);
+		double rate = 0;
+		try {
+			rate = getExchangeRateForDate(date);
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << RED << "Error: " << e.what() << RESET << std::endl;
+			continue;
+		}
 		// check rate?
-		double result = value * rate;
-
-		// 7. Print results or errors for each line
 		
+		double result = value * rate;
+		
+		// 7. Print results or errors for each line
+		std::cout << date << " => " << value << " = " << result << std::endl;
 	}
-	// 4. Validate date and value
-	// 5. Look up exchange rate for the date (or closest previous date) 
-	// 6. calculate value * rate
-	// 7. Print results or errors for each line
 }
