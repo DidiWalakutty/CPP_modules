@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/13 21:59:29 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 16:39:36 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/14 20:26:25 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
 		return false;
 	}
 
-	// if (year < 2009 || year > 2026)
-	// 	return false;
 	if (month < 1 || month > 12)
 		return false;
 	
