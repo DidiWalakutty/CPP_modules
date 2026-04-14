@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/10 18:07:59 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/13 21:55:16 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/14 17:24:38 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
 	if (argc != 2)
 {
-		std::cout << RED << "Error: Correct Usage: ./btc <input_file>" << RESET << std::endl;
+		std::cerr << RED << "Error: Correct Usage: ./btc <input_file>" << RESET << std::endl;
 		return 1;
 	}
 	
@@ -31,5 +31,5 @@ int main(int argc, char *argv[])
 		std::cerr << RED << "Error: " << e.what() << RESET << std::endl;
 		return 1;
 	}
-	
+	return 0;
 }
