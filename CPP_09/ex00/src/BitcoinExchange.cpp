@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/10 18:08:02 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 16:38:36 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/14 17:17:21 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		size_t pipePos = line.find('|');
 		if (pipePos == std::string::npos)
 		{
-			std::cout << RED << "Error: Bad input -> " << line << RESET << std::endl;
+			std::cerr << "Error: Bad input -> " << line << std::endl;
 			continue;
 		}
 
@@ -161,14 +161,14 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		std::string valueStr = trim(line.substr(pipePos + 1));
 		if (date.empty() || valueStr.empty())
 		{
-			std::cout << RED << "Error: Bad input -> " << line << RESET << std::endl;
+			std::cerr << "Error: Bad input -> " << line << std::endl;
 			continue;
 		}
 
 		// 4. Validate date
 		if (!isValidDate(date))
 		{
-			std::cout << RED << "Error: Invalid date format in input -> " << date << RESET << std::endl;
+			std::cerr << "Error: Invalid date format in input -> " << date << std::endl;
 			continue;
 		}
 
@@ -179,16 +179,17 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		}
 		catch (const std::exception &e)
 		{
-			std::cout << RED << "Invalid value in input: " << valueStr << RESET << std::endl;
+			std::cerr << "Invalid value in input: " << valueStr << std::endl;
+			continue;
 		}
 		if (value < 0)
 		{
-			std::cout << RED << "Error: Not a positive number -> " << valueStr << RESET << std::endl;
+			std::cerr << "Error: Not a positive number -> " << valueStr << std::endl;
 			continue;
 		}
 		if (value > 1000)
 		{
-			std::cout << RED << "Error: Too large a number -> " << valueStr << RESET << std::endl;
+			std::cerr << "Error: Too large a number -> " << valueStr << std::endl;
 			continue;
 		}
 			
@@ -199,14 +200,12 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		}
 		catch (const std::exception &e)
 		{
-			std::cout << RED << "Error: " << e.what() << RESET << std::endl;
+			std::cerr << "Error: " << e.what() << std::endl;
 			continue;
 		}
-		// check rate?
 		
 		double result = value * rate;
 		
-		// 7. Print results or errors for each line
 		std::cout << date << " => " << value << " = " << result << std::endl;
 	}
 }
