@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/10 18:08:02 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 20:25:17 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/18 00:55:08 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ BitcoinExchange::~BitcoinExchange()
 {
 	// std::cout << MAGENTA << "BitcoinExchange object destroyed." << RESET << std::endl;
 }
-
 
 /**
  *  @brief Loads and validates exchange rates from a CSV file.
@@ -131,8 +130,8 @@ double BitcoinExchange::getExchangeRateForDate(const std::string& date) const
 
 void BitcoinExchange::processInputFile(const std::string &inputFile)
 {
-	if (inputFile.empty())
-		throw std::runtime_error("Input file path is empty.");
+	// if (inputFile.empty())
+	// 	throw std::runtime_error("Input file path is empty.");
 
 	size_t dotPos = inputFile.find_last_of('.');
 	if (dotPos == std::string::npos || inputFile.substr(dotPos + 1) != "txt")
@@ -142,17 +141,16 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 	if (!file.is_open())
 		throw std::runtime_error("Failed to open input file: " + inputFile);
 
-	// Skip header line and check if file is empty
+	// Skip header line
 	std::string line;
-	if (!std::getline(file, line))
-		throw std::runtime_error("Input file is empty: " + inputFile);
+	std::getline(file, line);
 
 	while (std::getline(file, line))
 	{
-		// 1. Trim whitespace from the line
+		// 1. Trim whitespace + skip empty lines
 		line = trim(line);
 		if (line.empty())
-			continue; // Skip empty lines
+			continue;
 
 		// 2. Validate its format (similar to CSV but with " | " separator)
 		size_t pipePos = line.find('|');
