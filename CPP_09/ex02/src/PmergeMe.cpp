@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/14 20:05:39 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/18 00:37:25 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/18 00:40:51 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,18 @@ void PmergeMe::run()
 
 // do binary search through lower_bound to find correct position for small chain element
 // Each elelemnt is individually inserted into the correct position, so no need to sort.
-void PmergeMe::FJMergeInsert(std::vector<int> &Bigchain, const std::vector<int> &smallChain)
+void PmergeMe::FJMergeInsertVector(std::vector<int> &Bigchain, const std::vector<int> &smallChain)
 {
 	for (size_t i = 0; i < smallChain.size(); i++)
 	{
 		// use lower_bound (std library function) to find the correct position to insert smallChain[i]
 		
 	}
+}
+
+void FJMergeInsertDeque(std::deque<int> &bigChain, const std::deque<int > &smallChain)
+{
+
 }
 
 /**
@@ -130,13 +135,10 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 	FJSortVector(bigChain);
 
 	// then insert small chain
-	FJMergeInsert(bigChain, smallChain);
+	FJMergeInsertVector(bigChain, smallChain);
 
 	vec = bigChain;
 }
-
-
-
 
 
 void PmergeMe::FJSortDeque(std::deque<int> &deq)
@@ -147,7 +149,7 @@ void PmergeMe::FJSortDeque(std::deque<int> &deq)
 	std::deque<int> bigChain;
 	std::deque<int> smallChain;
 
-	bool orphan = (deq.size() %2 != 0);
+	bool orphan = (deq.size() % 2 != 0);
 
 	// static_cast to int to avoid warnings about signed/unsigned comparison
 	for (int i = 0; i < static_cast<int>(deq.size()) - 1; i += 2)
@@ -172,5 +174,8 @@ void PmergeMe::FJSortDeque(std::deque<int> &deq)
 	// printContainer(smallChain);
 
 	// now sort big chain
+	FJSortDeque(bigChain);
+
 	// then insert small chain
+	FJMergeInsertDeque(bigChain, smallChain);
 }
