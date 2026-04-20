@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/14 20:05:39 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/18 00:40:51 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/18 02:05:00 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool PmergeMe::validateInput(char **argv)
 		for (size_t j = 0; j < str.size(); j++)
 		{
 			if (!std::isdigit(str[j]))
-				throw std::runtime_error("Error: invalid character in input.");
+				throw std::runtime_error("invalid character in input.");
 		}
 
 		int num = std::atoi(str.c_str());
@@ -62,7 +62,7 @@ void PmergeMe::run()
 
 	// add timers
 	FJSortVector(_vector);
-	FJSortDeque(_deque);
+	// FJSortDeque(_deque);
 
 	// std::cout << "After:  " << std::endl; 
 	// printContainer(_vector);
@@ -72,29 +72,30 @@ void PmergeMe::run()
 
 }
 
-// do binary search through lower_bound to find correct position for small chain element
-// Each elelemnt is individually inserted into the correct position, so no need to sort.
-void PmergeMe::FJMergeInsertVector(std::vector<int> &Bigchain, const std::vector<int> &smallChain)
-{
-	for (size_t i = 0; i < smallChain.size(); i++)
-	{
-		// use lower_bound (std library function) to find the correct position to insert smallChain[i]
-		
-	}
-}
+/**
+ * Merge Insert: pendChain (smallest) into mainChain (largest + sorted):
+ * 
+ */
 
-void FJMergeInsertDeque(std::deque<int> &bigChain, const std::deque<int > &smallChain)
-{
 
-}
+
+// void PmergeMe::FJMergeInsertVector(std::vector<int> &mainChain, const std::vector<int> &pendChain)
+// {
+	
+// }
+
+// void FJMergeInsertDeque(std::deque<int> &mainChain, const std::deque<int > &pendChain)
+// {
+
+// }
 
 /**
  * Ford-Johnson sorting:
  * - Pair elements into big/small chains
  * - Handle orphan element if size is odd
- * - Recursively sort bigChain (breaks problem into smaller subproblems
+ * - Recursively sort mainChain (breaks problem into smaller subproblems
  *   until size <= 1)
- * - Insert smallChain into sorted bigChain
+ * - Insert pendChain into sorted mainChain
  * - Replace original vector with final sorted result
  */
 void PmergeMe::FJSortVector(std::vector<int> &vec)
@@ -103,8 +104,8 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 		return;
 
 	// organize into pairs
-	std::vector<int> bigChain;
-	std::vector<int> smallChain;
+	std::vector<int> mainChain;
+	std::vector<int> pendChain;
 
 	bool orphan = (vec.size() % 2 != 0);
 	
@@ -113,69 +114,69 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 	{
 		if (vec[i] > vec[i + 1])
 		{
-			bigChain.push_back(vec[i]);
-			smallChain.push_back(vec[i + 1]);
+			mainChain.push_back(vec[i]);
+			pendChain.push_back(vec[i + 1]);
 		}
 		else
 		{
-			bigChain.push_back(vec[i + 1]);
-			smallChain.push_back(vec[i]);
+			mainChain.push_back(vec[i + 1]);
+			pendChain.push_back(vec[i]);
 		}
 	}
 
 	if (orphan)
-		bigChain.push_back(vec.back());
+		mainChain.push_back(vec.back());
 
 	// std::cout << "Big chain: ";
-	// printContainer(bigChain);
+	// printContainer(mainChain);
 	// std::cout << "Small chain: ";
-	// printContainer(smallChain);
+	// printContainer(pendChain);
 	
 	// recursively sort big chain
-	FJSortVector(bigChain);
+	FJSortVector(mainChain);
 
 	// then insert small chain
-	FJMergeInsertVector(bigChain, smallChain);
+	// FJMergeInsertVector(mainChain, pendChain);
 
-	vec = bigChain;
+	// vec = mainChain;
 }
 
 
-void PmergeMe::FJSortDeque(std::deque<int> &deq)
-{
-	if (deq.size() <= 1)
-		return;
+// void PmergeMe::FJSortDeque(std::deque<int> &deq)
+// {
+// 	if (deq.size() <= 1)
+// 		return;
 
-	std::deque<int> bigChain;
-	std::deque<int> smallChain;
+// 	std::deque<int> mainChain;
+// 	std::deque<int> pendChain;
 
-	bool orphan = (deq.size() % 2 != 0);
+// 	bool orphan = (deq.size() % 2 != 0);
 
-	// static_cast to int to avoid warnings about signed/unsigned comparison
-	for (int i = 0; i < static_cast<int>(deq.size()) - 1; i += 2)
-	{
-		if (deq[i] > deq[i + 1])
-		{
-			bigChain.push_back(deq[i]);
-			smallChain.push_back(deq[i + 1]);
-		}
-		else
-		{
-			bigChain.push_back(deq[i + 1]);
-			smallChain.push_back(deq[i]);
-		}
-	}
-	if (orphan)
-		bigChain.push_back(deq.back());
+// 	// static_cast to int to avoid warnings about signed/unsigned comparison
+// 	for (int i = 0; i < static_cast<int>(deq.size()) - 1; i += 2)
+// 	{
+// 		if (deq[i] > deq[i + 1])
+// 		{
+// 			mainChain.push_back(deq[i]);
+// 			pendChain.push_back(deq[i + 1]);
+// 		}
+// 		else
+// 		{
+// 			mainChain.push_back(deq[i + 1]);
+// 			pendChain.push_back(deq[i]);
+// 		}
+// 	}
+// 	if (orphan)
+// 		mainChain.push_back(deq.back());
 	
-	// std::cout << "Big chain: ";
-	// printContainer(bigChain);
-	// std::cout << "Small chain: ";
-	// printContainer(smallChain);
+// 	// std::cout << "Big chain: ";
+// 	// printContainer(mainChain);
+// 	// std::cout << "Small chain: ";
+// 	// printContainer(pendChain);
 
-	// now sort big chain
-	FJSortDeque(bigChain);
+// 	// now sort big chain
+// 	FJSortDeque(mainChain);
 
-	// then insert small chain
-	FJMergeInsertDeque(bigChain, smallChain);
-}
+// 	// then insert small chain
+// 	FJMergeInsertDeque(mainChain, pendChain);
+// }
