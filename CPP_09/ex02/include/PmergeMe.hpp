@@ -29,8 +29,8 @@ class PmergeMe
 		void FJSortDeque(std::deque<int> &deq);
 
 		// Insert Small Elements
-		void FJMergeInsertVector(std::vector<int> &bigChain, const std::vector<int> &smallChain);
-		void FJMergeInsertDeque(std::deque<int> &bigChain, const std::deque<int > &smallChain);
+		void FJMergeInsertVector(std::vector<int> &mainChain, const std::vector<int> &pendChain);
+		void FJMergeInsertDeque(std::deque<int> &mainChain, const std::deque<int > &pendChain);
 
 		bool validateInput(char **argv);
 		void parseInput(char **argv);
