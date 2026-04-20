@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/14 20:05:36 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/17 21:51:34 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/18 02:04:31 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int main(int argc, char **argv)
 	}
 	try
 	{
+		
+		/// !!! duplicates: The management of errors related to duplicates is left to your discretion.
+
 		PmergeMe FJSorter(argv);
 		FJSorter.run();
-		// FJSorter.printResults();
 	}
 	catch(const std::exception& e)
 	{
