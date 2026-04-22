@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/14 20:05:39 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/18 02:05:00 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/22 22:48:28 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,48 +55,67 @@ void PmergeMe::parseInput(char **argv)
 	}
 }
 
+/**
+ * @brief Execute the Ford-Johnson algorithm and measures the time taken.
+ * 
+ * - Prints the original unsorted vector.
+ * - Sorts the vector using FJSortVector.
+ * - Sorts the deque using FJSortDeque.
+ * - Measures execution time in microseconds for both vector and deque.
+ * - Uses steady_clock for more accurate timing (not affected by system clock changes).
+ */
 void PmergeMe::run()
 {
-	// std::cout << "Before: ";
-	// printContainer(_vector);
+	std::cout << "Before: ";
+	printContainer(_vector);
 
-	// add timers
+	// --- Vector ---
+	auto startVec = std::chrono::steady_clock::now();
 	FJSortVector(_vector);
-	// FJSortDeque(_deque);
+	auto endVec = std::chrono::steady_clock::now();
+	auto durationVec = std::chrono::duration_cast<std::chrono::microseconds>(endVec - startVec).count();
+	
+	// --- Deque ---
+	auto startDeq = std::chrono::steady_clock::now();
+	FJSortDeque(_deque);
+	auto endDeq = std::chrono::steady_clock::now();
+	auto durationDeq = std::chrono::duration_cast<std::chrono::microseconds>(endDeq - startDeq).count();
 
-	// std::cout << "After:  " << std::endl; 
-	// printContainer(_vector);
+	// print sorted vector and timing results
+	std::cout << "After:  "; 
+	printContainer(_vector);
 
-	// std::cout << "Time taken to sort vector with << " << _vector.size() << " elements: " << std::endl;
-	// std::cout << "Time taken to sort deque with << " << _deque.size() << " elements: " << std::endl;
-
+	std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : " << durationVec << " microseconds" << std::endl;
+	std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : " << durationDeq << " microseconds" << std::endl;
 }
 
 /**
- * Merge Insert: pendChain (smallest) into mainChain (largest + sorted):
- * 
+ * @brief Inserts all elements from pendChain into the already sorted mainChain.
+ *
+ * Uses std::lower_bound (binary search) to find the correct insertion position
+ * for each element, ensuring mainChain remains sorted after each insertion.
  */
+void PmergeMe::insertSmallVecChain(std::vector<int> &mainChain, const std::vector<int> &pendChain)
+{
+	for (size_t i = 0; i < pendChain.size(); i++)
+	{
+		int small = pendChain[i];
+		auto it = std::lower_bound(mainChain.begin(), mainChain.end(), small);
 
-
-
-// void PmergeMe::FJMergeInsertVector(std::vector<int> &mainChain, const std::vector<int> &pendChain)
-// {
-	
-// }
-
-// void FJMergeInsertDeque(std::deque<int> &mainChain, const std::deque<int > &pendChain)
-// {
-
-// }
+		mainChain.insert(it, small);
+	}
+}
 
 /**
- * Ford-Johnson sorting:
- * - Pair elements into big/small chains
- * - Handle orphan element if size is odd
- * - Recursively sort mainChain (breaks problem into smaller subproblems
- *   until size <= 1)
- * - Insert pendChain into sorted mainChain
- * - Replace original vector with final sorted result
+ * @brief Ford–Johnson merge-insert sorting algorithm (vector version).
+ *
+ * Steps:
+ * - Split input into pairs of elements to compare + separate into larger and smaller elements.
+ * - Assign larger elements to mainChain, smaller to pendChain
+ * - If input size is odd, the last element (orphan) is unpaired and added to mainChain
+ * - Recursively sort mainChain (divide-and-conquer step)
+ * - Insert pendChain elements into sorted mainChain using binary search
+ * - Replace original vector with fully sorted result
  */
 void PmergeMe::FJSortVector(std::vector<int> &vec)
 {
@@ -124,59 +143,63 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 		}
 	}
 
+	// pushes last element (vec.back()) to mainChain if number of elements is odd (orphan)
 	if (orphan)
 		mainChain.push_back(vec.back());
-
-	// std::cout << "Big chain: ";
-	// printContainer(mainChain);
-	// std::cout << "Small chain: ";
-	// printContainer(pendChain);
 	
 	// recursively sort big chain
 	FJSortVector(mainChain);
 
 	// then insert small chain
-	// FJMergeInsertVector(mainChain, pendChain);
+	insertSmallVecChain(mainChain, pendChain);
 
-	// vec = mainChain;
+	vec = mainChain;
 }
 
+void PmergeMe::insertSmallDeqChain(std::deque<int> &mainChain, const std::deque<int> &pendChain)
+{
+	for (size_t i = 0; i < pendChain.size(); i++)
+	{
+		int small = pendChain[i];
+		auto it = std::lower_bound(mainChain.begin(), mainChain.end(), small);
 
-// void PmergeMe::FJSortDeque(std::deque<int> &deq)
-// {
-// 	if (deq.size() <= 1)
-// 		return;
+		mainChain.insert(it, small);
+	}
 
-// 	std::deque<int> mainChain;
-// 	std::deque<int> pendChain;
+}
 
-// 	bool orphan = (deq.size() % 2 != 0);
+void PmergeMe::FJSortDeque(std::deque<int> &deq)
+{
+	if (deq.size() <= 1)
+		return;
 
-// 	// static_cast to int to avoid warnings about signed/unsigned comparison
-// 	for (int i = 0; i < static_cast<int>(deq.size()) - 1; i += 2)
-// 	{
-// 		if (deq[i] > deq[i + 1])
-// 		{
-// 			mainChain.push_back(deq[i]);
-// 			pendChain.push_back(deq[i + 1]);
-// 		}
-// 		else
-// 		{
-// 			mainChain.push_back(deq[i + 1]);
-// 			pendChain.push_back(deq[i]);
-// 		}
-// 	}
-// 	if (orphan)
-// 		mainChain.push_back(deq.back());
-	
-// 	// std::cout << "Big chain: ";
-// 	// printContainer(mainChain);
-// 	// std::cout << "Small chain: ";
-// 	// printContainer(pendChain);
+	std::deque<int> mainChain;
+	std::deque<int> pendChain;
 
-// 	// now sort big chain
-// 	FJSortDeque(mainChain);
+	bool orphan = (deq.size() % 2 != 0);
 
-// 	// then insert small chain
-// 	FJMergeInsertDeque(mainChain, pendChain);
-// }
+	// static_cast to int to avoid warnings about signed/unsigned comparison
+	for (int i = 0; i < static_cast<int>(deq.size()) - 1; i += 2)
+	{
+		if (deq[i] > deq[i + 1])
+		{
+			mainChain.push_back(deq[i]);
+			pendChain.push_back(deq[i + 1]);
+		}
+		else
+		{
+			mainChain.push_back(deq[i + 1]);
+			pendChain.push_back(deq[i]);
+		}
+	}
+	if (orphan)
+		mainChain.push_back(deq.back());
+
+	// recursively sort big chain
+	FJSortDeque(mainChain);
+
+	// then insert small chain
+	insertSmallDeqChain(mainChain, pendChain);
+
+	deq = mainChain;
+}
