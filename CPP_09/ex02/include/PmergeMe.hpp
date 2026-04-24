@@ -36,13 +36,17 @@ class PmergeMe
 		std::vector<int> _vector;
 		std::deque<int> _deque;
 
-		// Sort Big Elements
+		// Sort Elements
 		void FJSortVector(std::vector<int> &vec);
 		void FJSortDeque(std::deque<int> &deq);
 
-		// Insert Small Elements
-		void insertSmallVecChain(std::vector<int> &mainChain, const std::vector<int> &pendChain);
-		void insertSmallDeqChain(std::deque<int> &mainChain, const std::deque<int> &pendChain);
+		// Creating Pairs
+		void sortVectorPairs(std::vector<std::pair<int, int> >& pairs);
+		void sortDequePairs(std::deque<std::pair<int, int> >& pairs);
+
+		// Insert Pending/small Elements
+		void insertPendingVecChain(std::vector<int> &mainChain, const std::vector<int> &pendChain);
+		void insertPendingDeqChain(std::deque<int> &mainChain, const std::deque<int> &pendChain);
 
 		bool validateInput(char **argv);
 		void parseInput(char **argv);
