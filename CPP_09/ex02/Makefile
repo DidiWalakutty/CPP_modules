@@ -9,7 +9,8 @@ HEADERS		= -I ./include
 # Source Files
 SRC			=	src/main.cpp \
 				src/PmergeMe.cpp \
-				src/PmergeMeVec.cpp 
+				src/PmergeMeVec.cpp \
+				src/PmergeMeDeq.cpp
 					
 OBJDIR		= obj
 OBJ			= $(addprefix $(OBJDIR)/, $(notdir $(SRC:.cpp=.o)))
