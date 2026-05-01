@@ -6,41 +6,81 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/25 15:30:35 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/25 16:55:11 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/04/28 23:18:32 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.hpp"
 
-std::vector<size_t> generateJHVec(size_t limit)
+static bool comparePairs(const std::pair<int, int>& a, const std::pair<int, int>& b)
 {
-	std::vector<size_t> jh;
+	return a.first < b.first;
+}
 
-	// base values
+/**
+ * Builds insertion order for pendChain using Jacobsthal grouping.
+ *
+ * 📌 Idea:
+ * - Jacobsthal indcies define chunk boundaries
+ * - Each chunk represents a range of pendChain indices
+ * - We process chunks in reverse order inside each block
+ * - Leftover elements are handled at the end
+ *
+ * 📌 Why reverse?
+ * - Higher indices depend on larger insertion ranges
+ * - Inserting them first reduces binary search comparisons
+ */
+std::vector<size_t> buildJacobsthalOrder(size_t n)
+{
+	std::vector<size_t> jh;		// Jacobsthal numbers
+	std::vector<size_t> order;	// final insertion order
+
+	// 1) Generate Jacobsthal sequence
 	jh.push_back(0); // J(0) = 0
 	jh.push_back(1); // J(1) = 1
 
-	// Keep generating jacobsthal until limit is reached
+	// build sequence up to size limit
 	while (true)
 	{
 		// element count
-		size_t currentSize = jh.size();
+		size_t size = jh.size();
 
-		// last two values
-		size_t last = jh[currentSize - 1];
-		size_t secondLast = jh[currentSize - 2];
+		//     J(2) = 1 + 2*0  = 1 + 2 * 0 = 1
+		//     J(3) = 1 + 2*1  = 1 + 2 * 1 = 3
+		//     J(4) = 3 + 2*1  = 3 + 2 * 1 = 5
+		size_t next = jh[size - 1] + 2 * jh[size - 2]; // J(n) = J(n-1) + 2*J(n-2)
 
-		// next jacobsthal number
-		size_t next = last + 2 * secondLast;
-
-		// Stop if next exceeds limit
-		if (next >= limit)
+		// Stop if next Jacobsthal number exceeds n, since we only need indices up to n
+		if (next >= n)
 			break;
-		
-		// Add next to the vector
+	
 		jh.push_back(next);
 	}
-	return jh;
+
+	// 2) Convert Jacobsthal into chunks
+	// Uses the differences between JH values and uses them as boundaries.
+	// example: JH = [0, 1, 3, 5, 11] 
+	// chunks: 3 - 1 = size 2 | 5 - 3 = size 2 | 11 - 5 = size 6 
+	size_t start = 0;
+
+	// skip first 2 values (0, 1 aren't useful for chunking)
+	for (size_t i = 2; i < jh.size(); ++i)
+	{
+		// Takes the smaller value: jh[i] or n to ensure we don't go out of bounds
+		size_t end = std::min(jh[i], n);
+
+		// 3) Reverse each chunk
+		for (size_t j = end; j > start; --j)
+			order.push_back(i - 1);
+
+		start = end;
+	}
+
+	// 4) Handle leftovers that didn't fit into a full chunk
+	for (size_t i = n; i > start; --i)
+		order.push_back(i - 1);
+
+	return order;
 }
 
 /**
@@ -67,21 +107,19 @@ void PmergeMe::sortVectorPairs(std::vector<std::pair<int, int> >& pairs)
 	std::vector<std::pair<int, int>> smallChain;
 
 	// 1) Split into bigChain (bigger) and smallChain (smaller)
-	for (size_t i = 0; i < pairs.size(); i += 2)
+	// i + 1 always ensures there's a second element to compare with 
+	// 1) Compare pairs two-by-two 
+	for (size_t i = 0; i + 1 < pairs.size(); i += 2)
 	{
-		const std::pair<int, int>& current = pairs[i];
-		const std::pair<int, int>& next = pairs[i + 1];
+		std::pair<int, int>& a = pairs[i];
+		std::pair<int, int>& b = pairs[i + 1];
 
-		if (current.first > next.first)
-		{
-			bigChain.push_back(current);
-			smallChain.push_back(next);
-		}
-		else
-		{
-			bigChain.push_back(next);
-			smallChain.push_back(current);
-		}
+		// Compare ONLY on .first (winner of the pair)
+		if (a.first < b.first)
+			std::swap(a, b);
+		
+		bigChain.push_back(a); // bigger goes to bigChain
+		smallChain.push_back(b); // smaller goes to smallChain
 	}
 
 	// 2) If odd number of pairs, last pair is orphan and goes to pending chain.
@@ -93,19 +131,14 @@ void PmergeMe::sortVectorPairs(std::vector<std::pair<int, int> >& pairs)
 	// Applies the same logic, but only to the bigger pairs, which reduces the num of comparisons.
 	sortVectorPairs(bigChain);
 
-	// 4) Insert pending pairs into sorted bigChain using binary search
-	// lower_bound(start, end, value, comparison_rule)
-	// - Uses comparePairs to find insertion position.
-	// - returns iterator pointing to position of insertion.
+	// 4) Rebuild structure
+	pairs.clear();
+
+	for (size_t i = 0; i < bigChain.size(); i++)
+		pairs.push_back(bigChain[i]);
+
 	for (size_t i = 0; i < smallChain.size(); i++)
-	{
-		std::vector<std::pair<int, int>>::iterator it =
-			std::lower_bound(bigChain.begin(), bigChain.end(), smallChain[i], comparePairs);
-		bigChain.insert(it, smallChain[i]);
-	}
-	
-	// Replace original
-	pairs = bigChain;	
+		pairs.push_back(smallChain[i]);
 }
 
 /**
@@ -118,19 +151,19 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 	if (vec.size() <= 1)
 		return;
 	
-	// Vector of pairs to hold the paired elements: [3, 5, 9, 7] becomes -> [(5, 3), (9, 7)]
+	// 1) Build Pairs
+	// Vector of pairs to hold the paired elements: first int is larger, second int is smaller
 	std::vector<std::pair<int, int>> pairs;
 
 	// Check if there's an odd element out (orphan)
 	bool hasOrphan = (vec.size() % 2 != 0);
 	int orphan = -1;
 	
-	// Store pair by creating pairs of two, ensuring the larger element is first in the pair.
+	// Create pairs of elements and sort them internally
 	for (size_t i = 0; i < vec.size() - 1; i += 2)
 	{
 		int a = vec[i];
 		int b = vec[i + 1];
-
 		// swap will ensure the larger element is always first
 		if (a < b)
 			std::swap(a, b);
@@ -138,16 +171,14 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 		pairs.push_back(std::make_pair(a, b));
 	}
 
-	// doesn't go in pairs, because it's one element and therefore "orphaned"
-	// sort after sortVectorPairs
 	if (hasOrphan)
 		orphan = vec.back();
 
+	// 2) Build hierachy
 	sortVectorPairs(pairs);
-
-	// Split sorted pairs into mainChain and pendChain:
-	// mainchain = larger elements -> first element of each pair
-	// pendchain = smaller elements -> second element of each pair
+	
+	
+	// 3) Extract chains into mainChain and pendChain by flattening the sorted pairs:
 	std::vector<int> mainChain;
 	std::vector<int> pendChain;
 	
@@ -156,14 +187,38 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 		mainChain.push_back(pairs[i].first);
 		pendChain.push_back(pairs[i].second);
 	}
+	std::cout << "mainChain (sorted pairs): ";
+	printContainer(mainChain);
 
-	// apply jacobsthal ordering = which order to insert pendChain elements into mainChain
-	
-	std::vector<size_t> jacobsthal = generateJHVec(pendChain.size());
-	
-	// insert using lower_bound
+	// 4) Sort mainChain
+	std::vector<int> sortedMain;
 
-	// insert orphan at the end if exists
+	for (size_t i = 0; i < mainChain.size(); i++)
+	{
+		std::vector<int>::iterator it =
+			std::lower_bound(sortedMain.begin(), sortedMain.end(), mainChain[i]);
+
+		sortedMain.insert(it, mainChain[i]);
+	}
+
+	mainChain = sortedMain;
+
+	// // 4) Build Jacobsthal order for pendChain insertion
+	std::vector<size_t> order = buildJacobsthalOrder(pendChain.size());
+	
+	// // 5) Insert pendChain into mainChain based on Jacobsthal order
+	for (size_t i = 0; i < order.size(); i++)
+	{
+		int value = pendChain[order[i]];
+
+		// Find insertion point in mainChain using binary search
+		std::vector<int>::iterator it =
+			std::lower_bound(mainChain.begin(), mainChain.end(), value);
+
+		mainChain.insert(it, value);
+	}
+
+	// // 6) Insert orphan if it exists
 	if (hasOrphan)
 	{
 		auto it = std::lower_bound(mainChain.begin(), mainChain.end(), orphan);

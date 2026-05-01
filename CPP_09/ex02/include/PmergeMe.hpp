@@ -24,33 +24,32 @@ void printContainer(const T& container)
 		{
 			std::cout << container[i] << " ";
 		}
-		std::cout << "[...] ";
-		std::cout << std::endl;
+		std::cout << "[...] " << std::endl;
 	}
 }
 
 class PmergeMe
 {
 	private:
-		// contain OG input (unsorted data)
+		// Original input (unsorted data)
 		std::vector<int> _vector;
 		std::deque<int> _deque;
 
-		// Sort Elements
+		// Core Algorithm
 		void FJSortVector(std::vector<int> &vec);
 		void FJSortDeque(std::deque<int> &deq);
 
-		// Creating Pairs
+		// Hierachy Building
 		void sortVectorPairs(std::vector<std::pair<int, int> >& pairs);
 		void sortDequePairs(std::deque<std::pair<int, int> >& pairs);
 
-		// Insert Pending/small Elements
-		void insertPendingVecChain(std::vector<int> &mainChain, const std::vector<int> &pendChain);
-		void insertPendingDeqChain(std::deque<int> &mainChain, const std::deque<int> &pendChain);
+		// Jacobsthal Sequence
+		std::vector<size_t> buildJacobsthalOrder(size_t n);
 
+		// Input Handling
 		bool validateInput(char **argv);
 		void parseInput(char **argv);
-		bool comparePairs(const std::pair<int, int>& a, const std::pair<int, int>& b);
+		// bool comparePairs(const std::pair<int, int>& a, const std::pair<int, int>& b);
 
 	public:
 		PmergeMe();
