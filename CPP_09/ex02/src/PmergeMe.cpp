@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/24 15:35:05 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/01 19:30:12 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/06 21:12:25 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,18 @@ void PmergeMe::run()
 	auto startVec = std::chrono::high_resolution_clock::now();
 	FJSortVector(_vector);
 	auto endVec = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsedVec = endVec - startVec;
+	std::chrono::duration<double, std::micro> elapsedVec = endVec - startVec;
 
 	auto startDeq = std::chrono::high_resolution_clock::now();
 	FJSortDeque(_deque);
 	auto endDeq = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsedDeq = endDeq - startDeq;
+	std::chrono::duration<double, std::micro> elapsedDeq = endDeq - startDeq;
 
 	std::cout << "After: ";
 	printContainer(_vector);
 	std::cout << "After: ";
 	printContainer(_deque);
 
-	std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : " << elapsedVec.count() << " seconds" << std::endl;
-	std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque  : " << elapsedDeq.count() << " seconds" << std::endl;
+	std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : " << elapsedVec.count() << " us" << std::endl;
+	std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque  : " << elapsedDeq.count() << " us" << std::endl;
 }
