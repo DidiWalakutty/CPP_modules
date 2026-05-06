@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/14 18:05:01 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 20:04:07 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/06 21:00:45 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int RPN::calculateResult(int a, int b, char op) const
  *  2) Turns the input string into a stream (treats it like a file) and split it into tokens (by whitespace)
  *  3) For each token:
  * 		- If digit -> convert and push onto stack
- * 		- If operator -> pop two values, apply operation and push result
+ * 		- If operator -> pop two values (b first, was added last, a second), apply operation and push result
  * 		- Otherwise, throw and error.
  *  4) At the end, stack must contain exactly one value -> the result
  */
@@ -77,11 +77,9 @@ void RPN::check(const std::string &input)
 	while (!_stack.empty())
 		_stack.pop();
 
-	// Turn the input string into a stream to read tokens one by one
 	std::istringstream stream(input);
 	std::string token;
 
-	// Read each token (separated by whitespace)
 	while (stream >> token)
 	{
 		// Case 1: single digit
@@ -107,13 +105,12 @@ void RPN::check(const std::string &input)
 		// Case 3: invalid token
 		else
 		{
-			throw std::runtime_error("Invalid token: " + std::string(1, token[0]));
+			throw std::runtime_error("Invalid token: " + token);
 		}
 	}
 	// Should only have result in stack
 	if (_stack.size() != 1)
 		throw std::runtime_error("Invalid expression left");
 	
-	// Print result
 	std::cout << _stack.top() << std::endl;
 }
