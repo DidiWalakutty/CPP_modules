@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/10 18:08:02 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/18 00:55:08 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/06 20:19:55 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 BitcoinExchange::BitcoinExchange() 
 {
-	// std::cout << MAGENTA << "BitcoinExchange object created." << RESET << std::endl;
+	// std::cout << "BitcoinExchange object created." << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(const std::string &dataFile)
@@ -38,7 +38,7 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &assign)
 
 BitcoinExchange::~BitcoinExchange() 
 {
-	// std::cout << MAGENTA << "BitcoinExchange object destroyed." << RESET << std::endl;
+	// std::cout << RED << "BitcoinExchange object destroyed." << RESET << std::endl;
 }
 
 /**
@@ -49,24 +49,30 @@ BitcoinExchange::~BitcoinExchange()
  */
 void BitcoinExchange::loadCSV(const std::string& dataFile)
 {
-	if (dataFile.empty())
-		throw std::runtime_error("Data file path is empty.");
-	
 	size_t dotPos = dataFile.find_last_of('.');
 	if (dotPos == std::string::npos || dataFile.substr(dotPos + 1) != "csv")
 		throw std::runtime_error("Data file must have a .csv extension.");
-
+	
 	std::ifstream file(dataFile);
 	if (!file.is_open())
 		throw std::runtime_error("Failed to open data file: " + dataFile);
 	
-	// Skip header line and check if file is empty
 	std::string line;
-	if (!std::getline(file, line))
+	bool isFirstLine = true;
+	
+	// Check if file is empty
+	if (file.peek() == std::ifstream::traits_type::eof())
 		throw std::runtime_error("Data file is empty: " + dataFile);
 	
 	while (std::getline(file, line))
 	{
+		if (isFirstLine)
+		{
+			isFirstLine = false;
+			if (line == "date,exchange_rate")
+				continue;
+		}
+		
 		size_t commaPos = line.find(',');
 		if (commaPos == std::string::npos)
 			throw std::runtime_error("Invalid CSV format: missing comma in line: " + line);
@@ -130,21 +136,21 @@ double BitcoinExchange::getExchangeRateForDate(const std::string& date) const
 
 void BitcoinExchange::processInputFile(const std::string &inputFile)
 {
-	// if (inputFile.empty())
-	// 	throw std::runtime_error("Input file path is empty.");
-
 	size_t dotPos = inputFile.find_last_of('.');
 	if (dotPos == std::string::npos || inputFile.substr(dotPos + 1) != "txt")
-		throw std::runtime_error("Input file must have a .txt extension.");
+		throw std::runtime_error(RED + std::string("Input file must have a .txt extension.") + RESET);
 
 	std::ifstream file(inputFile);
 	if (!file.is_open())
 		throw std::runtime_error("Failed to open input file: " + inputFile);
 
-	// Skip header line
+	// Check if file is empty
+	if (file.peek() == std::ifstream::traits_type::eof())
+		throw std::runtime_error("Input file is empty: " + inputFile);
+	
 	std::string line;
-	std::getline(file, line);
-
+	bool isFirstLine = true;
+	
 	while (std::getline(file, line))
 	{
 		// 1. Trim whitespace + skip empty lines
@@ -152,11 +158,18 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		if (line.empty())
 			continue;
 
+		if (isFirstLine)
+		{
+			isFirstLine = false;
+			if (line == "date | value")
+				continue;
+		}
+	
 		// 2. Validate its format (similar to CSV but with " | " separator)
 		size_t pipePos = line.find('|');
 		if (pipePos == std::string::npos)
 		{
-			std::cerr << "Error: Bad input -> " << line << std::endl;
+			std::cerr << RED << "Error: bad input -> " << line << RESET << std::endl;
 			continue;
 		}
 
@@ -165,14 +178,14 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		std::string valueStr = trim(line.substr(pipePos + 1));
 		if (date.empty() || valueStr.empty())
 		{
-			std::cerr << "Error: Bad input -> " << line << std::endl;
+			std::cerr << RED << "Error: bad input -> " << line << RESET << std::endl;
 			continue;
 		}
 
 		// 4. Validate date
 		if (!isValidDate(date))
 		{
-			std::cerr << "Error: Invalid date format in input -> " << date << std::endl;
+			std::cerr << RED << "Error: bad input -> " << date << RESET << std::endl;
 			continue;
 		}
 
@@ -183,17 +196,17 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		}
 		catch (const std::exception &e)
 		{
-			std::cerr << "Invalid value in input: " << valueStr << std::endl;
+			std::cerr << RED << "Error: bad input -> " << valueStr << RESET << std::endl;
 			continue;
 		}
 		if (value < 0)
 		{
-			std::cerr << "Error: Not a positive number -> " << valueStr << std::endl;
+			std::cerr << RED << "Error: not a positive number -> " << valueStr << RESET << std::endl;
 			continue;
 		}
 		if (value > 1000)
 		{
-			std::cerr << "Error: Too large a number -> " << valueStr << std::endl;
+			std::cerr << RED << "Error: too large a number -> " << valueStr << RESET << std::endl;
 			continue;
 		}
 			
@@ -204,7 +217,7 @@ void BitcoinExchange::processInputFile(const std::string &inputFile)
 		}
 		catch (const std::exception &e)
 		{
-			std::cerr << "Error: " << e.what() << std::endl;
+			std::cerr << RED << "Error: " << e.what() << RESET <<std::endl;
 			continue;
 		}
 		
