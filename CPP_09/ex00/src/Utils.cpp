@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/13 21:59:29 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/04/14 20:26:25 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/06 20:30:18 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 std::string BitcoinExchange::trim(const std::string& str) const
 {
 	size_t start = 0;
+	
 	// Trim leading whitespace
 	while (start < str.length() && std::isspace(static_cast<unsigned char>(str[start])))
 		++start;
