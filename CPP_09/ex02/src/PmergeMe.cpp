@@ -6,11 +6,13 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/24 15:35:05 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/06 21:12:25 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/07 20:56:35 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.hpp"
+
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(char **argv) 
 {
@@ -19,8 +21,28 @@ PmergeMe::PmergeMe(char **argv)
 	parseInput(argv);
 }
 
+PmergeMe::PmergeMe(const PmergeMe &copy) : _vector(copy._vector), _deque(copy._deque) {}
+
+PmergeMe &PmergeMe::operator=(const PmergeMe &assign)
+{
+	if (this != &assign)
+	{
+		_vector = assign._vector;
+		_deque = assign._deque;
+	}
+	return *this;
+}
+
 PmergeMe::~PmergeMe() {}
 
+/**
+ * @brief Validates the input arguments
+ * 
+ * Checks that:
+ * - arguments are not empty
+ * - arguments contain only digits
+ * - arguments are non-negative integers
+ */
 bool PmergeMe::validateInput(char **argv)
 {
 	for (int i = 1; argv[i]; i++)
@@ -43,13 +65,10 @@ bool PmergeMe::validateInput(char **argv)
 	return true;
 }
 
-// Receives two individual pairs and compares them based on the first element of the pair.
-// Checks if a is smaller than b
-// bool PmergeMe::comparePairs(const std::pair<int, int>& a, const std::pair<int, int>& b)
-// {
-// 	return a.first < b.first;
-// }
-
+/**
+ * @brief Converts input arguments into integers and stores them
+ * in both the vector and deque containers.
+ */
 void PmergeMe::parseInput(char **argv)
 {
 	for (int i = 1; argv[i] != nullptr; i++)
@@ -62,26 +81,35 @@ void PmergeMe::parseInput(char **argv)
 	}
 }
 
+/**
+ * @brief Executes Ford-Johnson sort on both containers
+ * and measures execution time in microseconds.
+ * 
+ * Time is measured separately for vector and deque to allow performance comparison.
+ */
 void PmergeMe::run()
 {
 	std::cout << "Before: ";
 	printContainer(_vector);
 
+	// --- Vector Sort ---
 	auto startVec = std::chrono::high_resolution_clock::now();
 	FJSortVector(_vector);
 	auto endVec = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double, std::micro> elapsedVec = endVec - startVec;
-
+	
+	// --- Deque Sort ---
 	auto startDeq = std::chrono::high_resolution_clock::now();
 	FJSortDeque(_deque);
 	auto endDeq = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double, std::micro> elapsedDeq = endDeq - startDeq;
-
-	std::cout << "After: ";
+	
+	std::cout << "After vec: ";
 	printContainer(_vector);
-	std::cout << "After: ";
+	std::cout << "After deq: ";
 	printContainer(_deque);
-
+	
+	// --- Performance Output ---
+	std::chrono::duration<double, std::micro> elapsedVec = endVec - startVec;
+	std::chrono::duration<double, std::micro> elapsedDeq = endDeq - startDeq;
 	std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : " << elapsedVec.count() << " us" << std::endl;
 	std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque  : " << elapsedDeq.count() << " us" << std::endl;
 }
