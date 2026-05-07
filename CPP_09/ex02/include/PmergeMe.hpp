@@ -40,11 +40,11 @@ class PmergeMe
 		void FJSortDeque(std::deque<int> &deq);
 
 		// Hierachy Building
-		void sortVectorPairs(std::vector<std::pair<int, int>>& pairs);
-		void sortDequePairs(std::deque<std::pair<int, int>>& pairs);
+		void sortVecByFirst(std::vector<std::pair<int, int>>& pairs);
+		void sortDeqByFirst(std::deque<std::pair<int, int>>& pairs);
 
 		// Jacobsthal Sequence
-		std::vector<size_t> buildJacobsthalOrder(size_t n);
+		std::vector<size_t> buildJacobsthalOrderVec(size_t n);
 		std::deque<size_t> buildJacobsthalOrderDeq(size_t n);
 
 		// Input Handling
@@ -54,8 +54,8 @@ class PmergeMe
 	public:
 		PmergeMe();
 		PmergeMe(char **argv);
-		PmergeMe(const PmergeMe &copy) = delete;
-		PmergeMe &operator=(const PmergeMe &assign) = delete;
+		PmergeMe(const PmergeMe &copy);
+		PmergeMe &operator=(const PmergeMe &assign);
 		~PmergeMe();
 
 		void run();
