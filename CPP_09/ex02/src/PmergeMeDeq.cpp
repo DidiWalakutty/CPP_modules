@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/25 19:27:36 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/01 19:26:18 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/07 20:50:40 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,41 @@ std::deque<size_t> PmergeMe::buildJacobsthalOrderDeq(size_t n)
 	return order;
 }
 
-void PmergeMe::sortDequePairs(std::deque<std::pair<int, int>>& pairs)
+static void mergeDeq(std::deque<std::pair<int, int>> &result,
+			   const std::deque<std::pair<int, int>> &left,
+			   const std::deque<std::pair<int, int>> &right)
+{
+	size_t l = 0;
+	size_t r = 0;
+	size_t i = 0;
+	
+	while (l < left.size() && r < right.size())
+	{
+		if (left[l].first <= right[r].first)
+			result[i++] = left[l++];
+		else
+			result[i++] = right[r++];
+	}
+
+	while (l < left.size())
+		result[i++] = left[l++];
+	while (r < right.size())
+		result[i++] = right[r++];
+}
+
+void PmergeMe::sortDeqByFirst(std::deque<std::pair<int, int>>& pairs)
 {
 	if (pairs.size() <= 1)
 		return;
-
-	std::deque<std::pair<int, int>> bigChain;
-	std::deque<std::pair<int, int>> smallChain;
-
-	for (size_t i = 0; i + 1 < pairs.size(); i += 2)
-	{
-		std::pair<int, int>& a = pairs[i];
-		std::pair<int, int>& b = pairs[i + 1];
-		
-		if (a.first < b.first)
-			std::swap(a, b);
-
-		bigChain.push_back(a);
-		smallChain.push_back(b);
-	}
-
-	if (pairs.size() % 2 != 0)
-		smallChain.push_back(pairs.back());
 	
-	sortDequePairs(bigChain);
+	size_t mid = pairs.size() / 2;
 	
-	pairs.clear();
-
-	for (size_t i = 0; i < bigChain.size(); i++)
-		pairs.push_back(bigChain[i]);
+	std::deque<std::pair<int, int>> left(pairs.begin(), pairs.begin() + mid);
+	std::deque<std::pair<int, int>> right(pairs.begin() + mid, pairs.end());
 	
-	for (size_t i = 0; i < smallChain.size(); i++)
-		pairs.push_back(smallChain[i]);
+	sortDeqByFirst(left);
+	sortDeqByFirst(right);
+	mergeDeq(pairs, left, right);
 }
 
 void PmergeMe::FJSortDeque(std::deque<int> &deq)
@@ -111,7 +114,7 @@ void PmergeMe::FJSortDeque(std::deque<int> &deq)
 	if (hasOrphan)
 		orphan = deq.back();
 
-	sortDequePairs(pairs);
+	sortDeqByFirst(pairs);
 
 	std::deque<int> mainChain;
 	std::deque<int> pendChain;
@@ -121,17 +124,6 @@ void PmergeMe::FJSortDeque(std::deque<int> &deq)
 		mainChain.push_back(pairs[i].first);
 		pendChain.push_back(pairs[i].second);
 	}
-
-	std::deque<int> sortedMain;
-	
-	for (size_t i = 0; i < mainChain.size(); i++)
-	{
-		std::deque<int>::iterator it =
-			std::lower_bound(sortedMain.begin(), sortedMain.end(), mainChain[i]);
-		
-		sortedMain.insert(it, mainChain[i]);
-	}
-	mainChain = sortedMain;
 
 	std::deque<size_t> order = buildJacobsthalOrderDeq(pendChain.size());
 	
