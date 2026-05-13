@@ -6,33 +6,26 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/25 15:30:35 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/07 20:59:58 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/13 15:44:49 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.hpp"
 
 /**
- * @brief Builds the insertion order for pendChain using Jacobsthal grouping.
- *
- * Jacobsthal numbers follow: J(n) = J(n-1) + 2 * J(n-2)
- * Sequence: 0, 1, 1, 3, 5, 11, 21, 43, ... => starts at index 0
+ * @brief Builds the insertion order for pendChain using Jacobsthal numbers.
  *
  * These numbers are used as boundaries to split pendChain into index ranges ("chunks").
  * By inserting in a non-linear order, we reduce the number of comparisons needed.
- *
+ * 
  * Each chunk is converted into indices and flattened in reverse order,
  * which improves binary search insertion efficiency.
- *
- * Example (n = 5):
- * Jacobsthal: 0, 1, 1, 3
- * Chunks:
- *   [0–1] → indices [0]
- *   [1–3] → indices [2, 1]
- *   [3–5] → indices [4, 3]
- * Final order: [0, 2, 1, 4, 3] => which is 'order' in FJSortVector.
  * 
- * Leftover elements that don't fit into a full chunk are added at the end.
+ * Process:
+ * 1) Generate a sequence of boundary values using Jacobsthal numbers until we exceed n.
+ * 2) Use them to split pendChain into chunks of indices.
+ * 3) Insert elements inside each chunk in reverse order to optimize binary search insertion.
+ * 4) Add any leftover indices that didn't fit in a full chunk.
  */
 std::vector<size_t> PmergeMe::buildJacobsthalOrderVec(size_t n)
 {
@@ -42,20 +35,16 @@ std::vector<size_t> PmergeMe::buildJacobsthalOrderVec(size_t n)
 	if (n == 0)
 		return order;
 		
-	// 1) Generate Jacobsthal sequence + add base cases to start the sequence.
+	// Start Jacobsthal sequence
 	jh.push_back(0);
 	jh.push_back(1);
 
-	// build sequence up to size limit n
+	// 1) Build sequence up to size limit n
 	while (true)
 	{
 		size_t size = jh.size();
-
-		// J(2) = 1 + 2*0 = 1
-		// J(3) = 1 + 2*1 = 3
 		size_t next = jh[size - 1] + 2 * jh[size - 2]; 
 
-		// Stop if next Jacobsthal number exceeds n (can not form a valid chunk)
 		if (next >= n)
 			break;
 	
@@ -63,11 +52,10 @@ std::vector<size_t> PmergeMe::buildJacobsthalOrderVec(size_t n)
 	}
 
 	// 2) Convert Jacobsthal boundaries into index chunks
-	//    Skip first 2 values since they don't form valid chunks
 	size_t start = 0;
 	for (size_t i = 2; i < jh.size(); ++i)
 	{
-		// Takes the smaller value to avoid going out of bounds
+		// Takes smaller value to avoid going out of bounds
 		size_t end = std::min(jh[i], n);
 
 		// 3) Add indices in reverse order inside the chunk
@@ -85,21 +73,14 @@ std::vector<size_t> PmergeMe::buildJacobsthalOrderVec(size_t n)
 }
 
 /**
- * @brief Merges two sorted halves of vector pairs into one sorted vector.
+ * @brief Merges two already sorted halves into one sorted vector.
+ * Combines two sorted lists into one sorted list by always picking the smaller value.
  *
- * Both halves are already sorted by '.first' because they were recursively processed
- * by sortVecByFirst(), which uses this same merge step.
- *
- * The merge process compares the '.first' values of both halves and builds a new
- * globally sorted sequence. At each step, the smaller element is selected and its
- * iterator is advanced. Once one half is fully consumed, the remaining elements of
- * the other half are appended (since they are already sorted).
- *
- * Example:
- * left  = [(20, 1), (50, 8)]
- * right = [(40, 3), (66, 2)]
- *
- * result = [(20, 1), (40, 3), (50, 8), (66, 2)]
+ * Process:
+ * - Compare front elements of both halves
+ * - Take the smaller one and append it
+ * - Move forward in that half
+ * - When one half is empty, append the remaining elements of the other half (already sorted) 
  */
 static void mergeVec(std::vector<std::pair<int, int>> &result,
 			   const std::vector<std::pair<int, int>> &left,
@@ -108,7 +89,6 @@ static void mergeVec(std::vector<std::pair<int, int>> &result,
 	size_t l = 0;
 	size_t r = 0;
 	size_t i = 0;
-	
 	while (l < left.size() && r < right.size())
 	{
 		if (left[l].first <= right[r].first)
@@ -125,21 +105,12 @@ static void mergeVec(std::vector<std::pair<int, int>> &result,
 
 /**
  * @brief Recursively sorts vector pairs by their '.first' value using merge sort.
+ *        This creates a sorted backbone for the Ford-Johnson algorithm.
  * 
  * This function:
- * 1) Splits the array into two halves
+ * 1) Splits the list into two halves
  * 2) Recursively sorts each half
  * 3) Merges the sorted halves using merge()
- * 
- * The recurrsion keeps breaking down the vector, until it reaches single-element pairs. 
- * At that point, merge() is called to sort + create a sorted half.
- * 
- * Example:
- * [(50, 8), (20, 1), (66, 2), (40, 3)]
- * Splits into:
- *  - Left:  [(50, 8), (20, 1)]
- *  - Right: [(66, 2), (40, 3)]
- * Then keeps splitting until: [(20, 1)], [(50, 8)], [(40, 3)], [(66, 2)]
  */
 void PmergeMe::sortVecByFirst(std::vector<std::pair<int, int>>& pairs)
 {
@@ -160,14 +131,11 @@ void PmergeMe::sortVecByFirst(std::vector<std::pair<int, int>>& pairs)
  * @brief Sorts a vector using the Ford-Johnson (merge-insert) algorithm.
  * 
  * Steps:
- * 1) Pair elements into ordered pairs (larger, smaller)
- * 2) Create the hierarchy by resursively sorting pairs by their larger element (the first of the pair)
- * 3) Split pairs into:
- *    - mainChain (sorted winners, now sorted)
- *    - pendChain (unsorted losers)
- * 4) Build Jacobsthal order for pendChain insertion
- * 5) Merge pendChain into mainChain using Jacobsthal order for efficient insertions.
- * 6) Handle orphan element if available
+ * 1) Pair elements into ordered pairs (larger, smaller) to create structure and reduce comparisons.
+ * 2) Build a sorted backbone using only the larger values (winners/larger).
+ * 4) Split pairs into mainChain (sorted winners) and pendChain (unsorted losers).
+ * 5) Smaller values (losers) are inesrted back in an optimed order
+ *    using Jacobsthal sequencing + binary search. 
  */
 void PmergeMe::FJSortVector(std::vector<int> &vec)
 {
@@ -179,7 +147,7 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 	bool hasOrphan = (vec.size() % 2 != 0);
 	int orphan = -1;
 	
-	// 1) Pair in elements of 2 and order them (larger, smaller)
+	// 1) Pair elements and order them (larger, smaller)
 	for (size_t i = 0; i < vec.size() - 1; i += 2)
 	{
 		int a = vec[i];
@@ -194,10 +162,10 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 	if (hasOrphan)
 		orphan = vec.back();
 
-	// 2) Build hierachy by sorting pairs
+	// 2) Build backbone by sorting winners
 	sortVecByFirst(pairs);
 	
-	// 3) Split pairs into mainChain and pendChain by flattening the sorted pairs
+	// 3) Split pairs into mainChain (winners) and pendChain (losers)
 	std::vector<int> mainChain;
 	std::vector<int> pendChain;
 	
@@ -207,17 +175,25 @@ void PmergeMe::FJSortVector(std::vector<int> &vec)
 		pendChain.push_back(pairs[i].second);
 	}
 
-	// 4) Build Jacobsthal order for pendChain insertion
+
+	// 4) Build Jacobsthal order to decide insertion order
 	std::vector<size_t> order = buildJacobsthalOrderVec(pendChain.size());	
 
-	// 5) Insert pendChain elements into mainChain in Jacobsthal order via binary search.
-	//    order[] contains positions in pendChain (not the values themselves).
+	// 5) Insert pendChain elements using Jacobsthal order.
+	//    - Jacobsthal order (reduces comparisons by inserting in a non-linear sequence)
+	//    - Binary search (fast position finding)
 	for (size_t i = 0; i < order.size(); i++)
 	{
-		int value = pendChain[order[i]];
+		size_t pairIndex = order[i];
+		
+		int value = pendChain[pairIndex];
+		int winner = pairs[pairIndex].first;
 
+		// Limit search range to position of its winner
+		std::vector<int>::iterator winnerPos = 
+			std::find(mainChain.begin(), mainChain.end(), winner);
 		std::vector<int>::iterator it =
-			std::lower_bound(mainChain.begin(), mainChain.end(), value);
+			std::lower_bound(mainChain.begin(), winnerPos, value);
 
 		mainChain.insert(it, value);
 	}

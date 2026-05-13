@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/25 19:27:36 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/07 20:50:40 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/13 15:45:21 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ std::deque<size_t> PmergeMe::buildJacobsthalOrderDeq(size_t n)
 	while (true)
 	{
 		size_t size = jh.size();
-		
-		// J(n) = J(n-1) + 2*J(n-2)
 		size_t next = jh[size - 1] + 2 * jh[size - 2];
 
 		if (next >= n)
@@ -129,10 +127,15 @@ void PmergeMe::FJSortDeque(std::deque<int> &deq)
 	
 	for (size_t i = 0; i < order.size(); i++)
 	{
+		size_t pairIndex = order[i];
+		
 		int value = pendChain[order[i]];
+		int winner = pairs[pairIndex].first;
 
+		std::deque<int>::iterator winnerPos = 
+			std::find(mainChain.begin(), mainChain.end(), winner);
 		std::deque<int>::iterator it =
-			std::lower_bound(mainChain.begin(), mainChain.end(), value);
+			std::lower_bound(mainChain.begin(), winnerPos, value);
 
 		mainChain.insert(it, value);
 	}
