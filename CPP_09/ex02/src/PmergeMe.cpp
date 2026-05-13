@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/24 15:35:05 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/07 20:56:35 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/08 16:02:40 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ PmergeMe::~PmergeMe() {}
  * - arguments are not empty
  * - arguments contain only digits
  * - arguments are non-negative integers
+ * - there are no duplicates.
+ *   unordered_set returns a pair (iterator, bool) where bool is false if the element already exists.
  */
 bool PmergeMe::validateInput(char **argv)
 {
+	std::unordered_set<int> duplicates;
+	
 	for (int i = 1; argv[i]; i++)
 	{
 		std::string str = argv[i];
@@ -60,6 +64,9 @@ bool PmergeMe::validateInput(char **argv)
 		int num = std::atoi(str.c_str());
 		if (num < 0)
 			throw std::runtime_error("negative number found in input.");
+		
+		if (!duplicates.insert(num).second)
+			throw std::runtime_error("duplicate number found in input.");
 	}
 
 	return true;
