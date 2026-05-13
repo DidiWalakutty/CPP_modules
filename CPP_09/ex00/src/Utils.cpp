@@ -6,46 +6,50 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/13 21:59:29 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/06 20:30:18 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/13 16:10:01 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/BitcoinExchange.hpp"
 
+/**
+ * @brief Trimes leading and trailing whitespace from a string.
+ */
 std::string BitcoinExchange::trim(const std::string& str) const
 {
 	size_t start = 0;
 	
-	// Trim leading whitespace
 	while (start < str.length() && std::isspace(static_cast<unsigned char>(str[start])))
 		++start;
 
 	size_t end = str.length();
-	// Trim trailing whitespace
 	while (end > start && std::isspace(static_cast<unsigned char>(str[end - 1])))
 		end--;
 	
-	// Return the trimmed string
 	return str.substr(start, end - start);
 }
 
 /**
  * @brief Determines if a given year is a leap year.
  *
- * Applies standard leap year rules (divisible by 4, except centuries
- * unless divisible by 400).
+ * Leap year rules:
+ * - A year is a leap year if divisible by 4
+ * - EXCEPT if it's divisible by 100, it's not a leap year
+ * - UNLESS it's divisible by 100 AND 400, it is a leap year
+ * 
+ * Examples:
+ * - 2000 → leap year (divisible by 400)
+ * - 1900 → not a leap year (divisible by 100, not 400)
+ * - 2024 → leap year (divisible by 4, not 100)
  */
 bool BitcoinExchange::isLeapYear(int year) const
 {
-	// divisible by 400 -> Leap Year
 	if (year % 400 == 0)
 		return true;
 	
-	// divisible by 100 but not by 400 -> Not a Leap Year
 	if (year % 100 == 0)
 		return false;
 	
-	// Otherwise: divisible by 4 -> Leap Year
 	return (year % 4 == 0);
 }
 
