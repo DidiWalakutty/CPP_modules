@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/24 15:35:05 by diwalaku      #+#    #+#                 */
-/*   Updated: 2026/05/08 16:02:40 by diwalaku      ########   odam.nl         */
+/*   Updated: 2026/05/13 15:49:13 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,6 @@ void PmergeMe::run()
 	
 	std::cout << "After vec: ";
 	printContainer(_vector);
-	std::cout << "After deq: ";
-	printContainer(_deque);
 	
 	// --- Performance Output ---
 	std::chrono::duration<double, std::micro> elapsedVec = endVec - startVec;
