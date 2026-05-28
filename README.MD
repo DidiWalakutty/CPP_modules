@@ -86,12 +86,24 @@ I approached these projects with a strong focus on **understanding what’s happ
 
 ---
 
+### 🔹 CPP09 — STL
+
+- STL containers (`vector`, `deque`, `stack`, `list`)  
+- iterators and container traversal  
+- parsing and data validation  
+- algorithm implementation and performance comparison  
+- sorting and expression evaluation  
+- choosing the right container for the problem  
+
+---
+
 ## 🎯 Key Takeaways
 
 - I learned to think in terms of **systems, not just functions**  
 - Became comfortable managing **memory explicitly and safely**  
 - Developed a habit of **breaking down complex problems into clear steps**  
-- Focused on writing code that is also **readable and maintainable**  
+- Improved my ability to choose the right **data structures and algorithms for the problem**  
+- Focused on writing code that is not only correct, but also **readable and maintainable**  
 
 ---
 
@@ -100,9 +112,9 @@ I approached these projects with a strong focus on **understanding what’s happ
 These modules form my foundation in C++, moving from fundamentals to more advanced concepts step by step.
 
 What I've Learned:
-- Building structured and reliable systems
-- Writing clean architecture
-- Scalibility
-- Memory Safety
-
-The final module (CPP09) will be added as I continue.
+- Building structured and reliable systems  
+- Writing clean architecture  
+- Scalability in code and design  
+- Memory safety and ownership awareness  
+- Using STL effectively for real-world problems  
+- Thinking in terms of performance and data structures  
